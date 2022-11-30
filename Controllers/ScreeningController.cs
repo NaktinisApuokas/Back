@@ -55,9 +55,6 @@ namespace FobumCinema.Controllers
             return Created($"/api/cinemas/{cinemaId}/movies/{movieId}/screenings/{screening.Id}", _mapper.Map<ScreeningDto>(screening));
         }
 
-
-
-
         //update
         [HttpPut("{screeningId}")]
         public async Task<ActionResult<ScreeningDto>> PostAsync(int movieId, int screeningId, UpdateScreeningDto screeningDto)
@@ -75,9 +72,6 @@ namespace FobumCinema.Controllers
 
             return Ok(_mapper.Map<ScreeningDto>(oldScreening));
         }
-
-
-
 
         [HttpDelete("{screeningId}")]
         public async Task<ActionResult> DeleteAsync(int movieId, int screeningId)

@@ -13,9 +13,7 @@ namespace FobumCinema.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // !!! DON'T STORE THE REAL CONNECTION STRING THE IN PUBLIC REPO !!!
-            // Use secret managers provided by your chosen cloud provider
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=RestDemo4");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=FobumCinema");
         }
     }
 }

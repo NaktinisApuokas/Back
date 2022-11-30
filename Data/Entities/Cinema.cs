@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using FobumCinema.Data.Dtos.Auth;
-using System.Threading.Tasks;
 
 namespace FobumCinema.Data.Entities
 {
