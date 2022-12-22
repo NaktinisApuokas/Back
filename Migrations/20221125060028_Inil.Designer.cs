@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FobumCinema.Migrations
 {
     [DbContext(typeof(FobumCinemaContext))]
-    [Migration("20221014060028_Inil")]
+    [Migration("20221125060028_Inil")]
     partial class Inil
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\namek\\Desktop\\oop\\FobumCinema\\FobumCinema.csproj": {}
+    "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj": {}
   },
   "projects": {
-    "C:\\Users\\namek\\Desktop\\oop\\FobumCinema\\FobumCinema.csproj": {
+    "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\namek\\Desktop\\oop\\FobumCinema\\FobumCinema.csproj",
+        "projectUniqueName": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj",
         "projectName": "FobumCinema",
-        "projectPath": "C:\\Users\\namek\\Desktop\\oop\\FobumCinema\\FobumCinema.csproj",
+        "projectPath": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\FobumCinema.csproj",
         "packagesPath": "C:\\Users\\namek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\namek\\Desktop\\oop\\FobumCinema\\obj\\",
+        "outputPath": "C:\\Users\\namek\\Desktop\\oop\\PresentConectionFolder\\Project\\PresentConnection\\PresentConectionProjektas\\PresentConnection\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\namek\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,6 +55,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",

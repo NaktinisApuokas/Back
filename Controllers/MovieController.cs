@@ -17,6 +17,7 @@ namespace FobumCinema.Controllers
         private readonly ICinemaRepository _CinemaRepository;
         private readonly IMapper _mapper;
         
+
         public MovieController(IMovieRepository MovieRepository, IMapper mapper, ICinemaRepository CinemaRepository)
         {
             _MovieRepository = MovieRepository;
@@ -55,12 +56,12 @@ namespace FobumCinema.Controllers
         }
 
         [HttpPut("{movieId}")]
-        public async Task<ActionResult<MovieDto>> PostAsync(int cinemaId, int movieId, UpdateMovieDto movieDto)
+        public async Task<ActionResult<MovieDto>> PutAsync(int CinemaId, int movieId, UpdateMovieDto movieDto)
         {
-            var cinema = await _CinemaRepository.Get(cinemaId);
-            if (cinema == null) return NotFound($"Couldn't find a movie with id of {cinemaId}");
+            var cinema = await _CinemaRepository.Get(CinemaId);
+            if (cinema == null) return NotFound($"Couldn't find a movie with id of {CinemaId}");
 
-            var oldMovie = await _MovieRepository.GetAsync(cinemaId, movieId);
+            var oldMovie = await _MovieRepository.GetAsync(CinemaId, movieId);
             if (oldMovie == null)
                 return NotFound();
 
@@ -72,9 +73,9 @@ namespace FobumCinema.Controllers
         }
 
         [HttpDelete("{movieId}")]
-        public async Task<ActionResult> DeleteAsync(int cinemaId, int movieId)
+        public async Task<ActionResult> DeleteAsync(int CinemaId, int movieId)
         {
-            var movie = await _MovieRepository.GetAsync(cinemaId, movieId);
+            var movie = await _MovieRepository.GetAsync(CinemaId, movieId);
             if (movie == null)
                 return NotFound();
 

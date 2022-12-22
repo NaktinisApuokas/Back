@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FobumCinema.Migrations
 {
     [DbContext(typeof(FobumCinemaContext))]
-    [Migration("20221117225147_identity")]
+    [Migration("20221127225147_identity")]
     partial class identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
