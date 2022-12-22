@@ -1,51 +1,42 @@
 
-
-
-
-
-
 # Laboratorinio darbo ataskaita
 
 ### Sistemos paskirtis:
 
-##### Projekto tikslas
-Sudaryti tinklo aplikaciją, kuri palengvintų turimo turto valdymą žemės ūkyje.
+##### Projekto tikslas: 
+Sudaryti tinklo aplikaciją, kurioje būtų galima matyti rodomus filmus skirtinguose kino 
+teatruose, o po to esant norui nusipirki bilietą į norimą seansą.
 
 ##### Tinklo aplikacijos veikimo principas: 
-Valdytojas, kurio paskyrą sukuria administratorius, naudodamasis platforma tikrins sandėlių likučius ir prireikus juos pakeis.
+Darbuotojas, kurio paskyrą sukuria administratorius, naudodamasis platforma turės 
+galimybę pridėti, pašalinti arba redaguoti norimus filmus, seansus arba kino teatrus. 
+Darbuotojas, norėdamas naudotis šia platforma, prisiregistruos prie internetinės aplikacijos. 
+Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai patvirtinti.
+
 
 ### Funkciniai reikalavimai
 
- #### Neregistruotas sistemos naudotojas(Svečias) galės:
- 1. Peržiūrėti platformos reprezentacinį puslapį.
- 2. Prisijungti prie internetinės aplikacijos.
-#### Registruotas sistemos naudotojas(Valdytojas) galės:
- 1. Prisijungti prie platformos.
- 2. Atsijungti nuo platformos.
- 3. Užregistruoti naują sandėlį:
-	 3.1. Aprašyti sandėlio savybes.
-	 3.2. Redaguoti sandėlio savybes.
- 4. Peržiūrėti kitų naudotojų užregistruotus sandėlius. 
-#### Administratorius galės:
- 1. Sudaryti naujo valdytojo ar administratoriaus paskyrą.
- 2. Atlikti veiksmus su regionais:
-	 2.1. Pridėti naują regioną.
-	 2.2. Redaguoti regioną.
-	 2.3. Pašalinti regioną.
- 3. Atlikti veiksmus su žemės plotais:
-	 3.1. Pridėti naują žemės plotą.
-	 3.2. Redaguoti žemės plotą.
-	 3.3. Pašalinti žemės plotą.
- 4. Atlikti veiksmus su sandėliais:
-	 4.1. Pridėti naują sandėlį.
-	 4.2. Redaguoti sandėlį.
-	 4.3. Pašalinti sandėlį
- 5. Atlikti veiksmus su naudotojų duomenimis:
-	 5.1. Pridėti naują naudotoją.
-	 5.2. Redaguoti naudotojo duomenis.
-	 5.3. Pašalinti naudotoją.
+ #### Neregistruotas sistemos naudotojas galės: 
+1. Peržiūrėti rodomus filmus. 
+2. Prisijungti prie internetinės aplikacijos.
+
+#### Registruotas sistemos naudotojas galės: 
+1. Atsijungti nuo internetinės aplikacijos. 
+2. Prisijungti prie platformos. 
+3. Pridėti/Šalinti/Redaguoti filmą.
+4. Pridėti/Šalinti/Redaguoti kino teatrą.
+5. Pridėti/Šalinti/Redaguoti seansą.
+
+#### Administratorius galės: 
+1. Sudaryti naujo darbuotojo paskyrą. 
+2. Šalinti naudotojus. 
+3. Patvirtinti naujus filmus bei kino teatrus.
 
 ## Sistemos architektūra
+
+#### Sistemos sudedamosios dalys: 
+• Kliento pusė - naudojant „React.js“ karkasą. 
+• Serverio pusė - naudojant „ASP.NET“ karkasą. Duomenų bazė - „MySQL“. 
 
 ![Sistemos diegimo diagrama](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/uml_deployment.png)
 
@@ -61,33 +52,26 @@ Valdytojas, kurio paskyrą sukuria administratorius, naudodamasis platforma tikr
 |![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_region.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_region_pic.png)|
 |![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/create_user.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/create_user_pic.png)|
 |![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_building.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_building_pic.png)|
+
+
+
 ## API specifkacija
 
-### Regionai
+### Get
 
-#### GET api/regions
+#### GET api/cinemas
 
-Gražina visus regionus.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
+Gražina visus kino teatrus.
 
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|200	 		 |Gražina sąrašą su reikšmėmis   |
+|200	 		 |Gražina kino teatrų sąrašą    |
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
-{domain}/api/regions
+
+/api/cinemas
 
 ##### Atsakymas:
 
@@ -111,30 +95,20 @@ Gražina visus regionus.
 
     []
 
-#### GET api/regions/id
+#### GET api/cinemas/id
 
-Gražina regioną pagal pateikiamą **id**.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
+Gražina nurodytą kino teatrą.
 
 
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|200	 		 |Gražina sąrašą su reikšmėmis   |
-|404			 |Naudotojas su **id** nerastas  |
+|200	 		 |Gražina nurodytą kino teatrą   |
+|404			 |Kino teatras su **id** nerastas  |
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
-{domain}/api/regions/**1**
+{domain}/api/cinemas/**1**
 
 ##### Atsakymas:
 
@@ -155,160 +129,13 @@ Gražina regioną pagal pateikiamą **id**.
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }
 
-#### POST api/regions
-
-Sukuria naują regioną pagal pateiktus duomenis.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|country		 |šalis, kur yra regionas        |
-|name			 |Regiono pavadinimas            |
-|description     |Regiono aprašymas				 |
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|201	 		 |Gražina sukurtą regioną	     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions
-
-##### JSON duomenys:
-
-    {
-	    "country": "Lenkija",
-	    "name": "Liubušas",
-	    "description": "Regionas šalia vandens"
-    }
-
-##### Atsakymas:
-
-    {
-	    "id": 7,
-	    "country": "Lenkija",
-	    "name": "Liubušas",
-	    "description": "Regionas šalia vandens"
-    }
-
-#### PATCH api/regions/id
-
-Koreguoja regiono su **id** turimus duomenis.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|description     |Regiono aprašymas				 |
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|200	 		 |Gražina koreguotą regioną	     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-
-{domain}/api/regions/**7**
-##### JSON duomenys:
-
-    {
-	    "description": "Regionas šalia vandens"
-    }
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    {
-        "id": 7,
-        "country": "Lenkija",
-        "name": "Liubušas",
-        "description": "Regionas šalia vandens"
-    }
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }    
-#### DELETE api/regions/id
-
-Panaikiną regiono su **id** įrašą.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|204	 		 |Nieko negražina			     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions/**1**
-
-##### Atsakymas:
-
-Gražinamas 204 kodas
-
-### Žemės plotai
-
 #### GET api/regions/regionId/landplots
 
 Gražina visus žemės plotus susietus su regionu, kurio id lygus **regionId**.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
 #### Galimi atsako kodai
 
-  
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200|Gražina sąrašą su reikšmėmis
-
-
-  
 
 #### Panaudojimo pavyzdžiai
 
@@ -341,24 +168,15 @@ Gražina visus žemės plotus susietus su regionu, kurio id lygus **regionId**.
 **Kai duomenų bazė neturi duomenų:**
 
     []
+    
+    
 
 #### GET api/regions/regionId/landplots/id
 
 Gražina žemės plotą pagal **id**, kuris susietas su regionu, kurio id lygus **regionId**.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200	 		 |Gražina sąrašą su reikšmėmis   |
 |404			 |Naudotojas su **id** nerastas  |
 
@@ -386,155 +204,15 @@ Gražina žemės plotą pagal **id**, kuris susietas su regionu, kurio id lygus 
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }
 
-#### POST api/regions/regionId/landplots
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|address		 |Žemės ploto adresas	         |
-|owner			 |Žemės ploto savininko vardas   |
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|201	 		 |Gražina sukurtą žemės plotą 	 |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions/**1**/landplots
-
-##### JSON duomenys:
-
-    {
-	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-	    "owner": "Rimantas Vauka"
-    }
-
-##### Atsakymas:
-
-    {
-	    "id": 3,
-	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-	    "owner": "Rimantas Vauka"
-    }
-
- 
-#### PATCH api/regions/regionId/landplots/id
-
-Koreguoja žemės ploto su **id** turimus duomenis.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|owner			 |Žemės ploto savininko vardas   |
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|200	 		 |Gražina koreguotą žemės plotą	 |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-
-{domain}/api/regions/**1**/landplots/**1**
-##### JSON duomenys:
-
-    {
-	    "owner": "Rimantas Vauka"
-    }
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    {
-	    "id": 3,
-	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-	    "owner": "Rimantas Vauka"
-    }
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }    
-#### DELETE api/regions/regionId/landplots/id
-
-Panaikiną žemės ploto su **id** įrašą.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|204	 		 |Nieko negražina			     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions/**1**/landplots/**1**
-
-##### Atsakymas:
-
-Gražinamas 204 kodas
-
-### Pastatai
 
 #### GET api/regions/regionId/landplots/landplotId/buildings
 
 Gražina visus pastatus susietus su žemės plotu **landplotId** ir regionu, kurio id lygus **regionId**.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
 #### Galimi atsako kodai
 
-  
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200|Gražina sąrašą su reikšmėmis
-
-
-  
 
 #### Panaudojimo pavyzdžiai
 
@@ -566,24 +244,15 @@ Gražina visus pastatus susietus su žemės plotu **landplotId** ir regionu, kur
 **Kai duomenų bazė neturi duomenų:**
 
     []
+    
+    
 
 #### GET api/regions/regionId/landplots/landplotId/buildings/id
 
 Gražina pastatą pagal **id**, kuris susietas su regionu ir žemės plotu, kurių id lygūs **regionId** ir **landplotId**.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200	 		 |Gražina pastatą su reikšmėmis  |
 |404			 |Naudotojas su **id** nerastas  |
 
@@ -613,28 +282,233 @@ Gražina pastatą pagal **id**, kuris susietas su regionu ir žemės plotu, kuri
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }
 
-#### POST api/regions/regionId/landplots/landplotId/buildings
-##### Reikalaujamos siuntimo antraštės:
 
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
 
-##### Reikalaujami siuntimo parametrai:
 
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|name			 |Pastato pavadinimas	         |
-|type			 |Pastato tipas   				 |
-|size			 |Maksimali pastato talpa   	 |
-|occupancy		 |Dabartinis pastato užimtumo kiekis   |
+
+
+
+
+
+
+
+
+
+
+
+
+### Delete
+
+Visų Delete galimi atsako kodai vienodi:
 
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
+
+|204	 		 |Gražina 204 statusą		     |
+
+
+#### DELETE api/cinemas/id
+
+Panaikiną nurodytą kino teatrą.
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+/api/cinemas/**1**
+
+##### Atsakymas:
+
+Gražinamas 204 kodas
+
+
+#### DELETE api/cinemas/cinemasId/movies/id
+
+Panaikiną nurodytą filmą.
+
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+/api/cinemas/**1**/movies/**1**
+
+##### Atsakymas:
+
+Gražinamas 204 kodas
+
+
+#### DELETE api/cinemas/cinemasId/movies/id/screening/id
+
+Panaikiną nurodytą seansą.
+
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+/api/cinemas/**1**/movies/**1**/screening/**1**
+
+##### Atsakymas:
+
+Gražinamas 204 kodas
+
+
+
+
+
+
+### Regionai
+
+
+
+#### POST api/regions
+
+Sukuria naują regioną pagal pateiktus duomenis.
+
+#### Galimi atsako kodai
+
+|201	 		 |Gražina sukurtą regioną	     |
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+{domain}/api/regions
+
+##### JSON duomenys:
+
+    {
+	    "country": "Lenkija",
+	    "name": "Liubušas",
+	    "description": "Regionas šalia vandens"
+    }
+
+##### Atsakymas:
+
+    {
+	    "id": 7,
+	    "country": "Lenkija",
+	    "name": "Liubušas",
+	    "description": "Regionas šalia vandens"
+    }
+
+#### PATCH api/regions/id
+
+Koreguoja regiono su **id** turimus duomenis.
+
+#### Galimi atsako kodai
+
+|200	 		 |Gražina koreguotą regioną	     |
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+
+{domain}/api/regions/**7**
+##### JSON duomenys:
+
+    {
+	    "description": "Regionas šalia vandens"
+    }
+
+##### Atsakymas:
+
+**Kai duomenų bazė turi duomenų:**
+
+    {
+        "id": 7,
+        "country": "Lenkija",
+        "name": "Liubušas",
+        "description": "Regionas šalia vandens"
+    }
+
+  **Kai duomenų bazė neturi duomenų:**
+
+    {
+	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+	    "title": "Not Found",
+	    "status": 404,
+	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
+    }    
+
+
+
+
+### Žemės plotai
+
+
+
+#### POST api/regions/regionId/landplots
+
+#### Galimi atsako kodai
+
+|201	 		 |Gražina sukurtą žemės plotą 	 |
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+{domain}/api/regions/**1**/landplots
+
+##### JSON duomenys:
+
+    {
+	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
+	    "owner": "Rimantas Vauka"
+    }
+
+##### Atsakymas:
+
+    {
+	    "id": 3,
+	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
+	    "owner": "Rimantas Vauka"
+    }
+
+ 
+#### PATCH api/regions/regionId/landplots/id
+
+Koreguoja žemės ploto su **id** turimus duomenis.
+
+#### Galimi atsako kodai
+
+|200	 		 |Gražina koreguotą žemės plotą	 |
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+
+{domain}/api/regions/**1**/landplots/**1**
+##### JSON duomenys:
+
+    {
+	    "owner": "Rimantas Vauka"
+    }
+
+##### Atsakymas:
+
+**Kai duomenų bazė turi duomenų:**
+
+    {
+	    "id": 3,
+	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
+	    "owner": "Rimantas Vauka"
+    }
+
+  **Kai duomenų bazė neturi duomenų:**
+
+    {
+	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+	    "title": "Not Found",
+	    "status": 404,
+	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
+    }    
+
+
+### Pastatai
+
+
+
+#### POST api/regions/regionId/landplots/landplotId/buildings
+
+#### Galimi atsako kodai
+
 |201	 		 |Gražina sukurtą pastatą	 |
 
 #### Panaudojimo pavyzdžiai
@@ -666,26 +540,8 @@ Gražina pastatą pagal **id**, kuris susietas su regionu ir žemės plotu, kuri
 
 Koreguoja pastato su **id** turimus duomenis.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|type			 |Pastato tipas   				 |
-|size			 |Maksimali pastato talpa   	 |
-|occupancy		 |Dabartinis pastato užimtumo kiekis   |
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200	 		 |Gražina koreguotą pastatą	 |
 
 #### Panaudojimo pavyzdžiai
@@ -722,99 +578,14 @@ Koreguoja pastato su **id** turimus duomenis.
 	    "status": 404,
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }    
-    
-#### DELETE api/regions/regionId/landplots/landplotId/buildings/id
-
-Panaikiną pastato su **id** įrašą.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|204	 		 |Nieko negražina			     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions/**1**/landplots/**1**/buildings/**1**
-
-##### Atsakymas:
-
-Gražinamas 204 kodas
+   
 
 ### Naudotojai
 
-#### GET api/users
-
-Gražina visus naudotojus.
-
-Šį veiksmą gali atlikti tik administratorius.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|200	 		 |Gražina sąrašą su reikšmėmis   |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/users
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    [
-	    {
-		    "id": 1,
-		    "name": "User first and last name",
-		    "email": "administrator@mail.com",
-		    "password": "$2a$11$beIOcDJWCI8Mh206tweaHeXzViULgBV3GlyV.N2c6OMu8q4pTLLxe",
-		    "role": "Administrator"
-	    },
-	    {
-		    "id": 1,
-		    "name": "User first and last name",
-		    "email": "manager@mail.com",
-		    "password": "$2a$11$KLWsFT0.gf4KQ6A/79YOzeoHCrVnAvaBtddM9cewVvj5uo7DY6GWa",
-		    "role": "Manager"
-	    }
-    ]
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    []
 
 #### GET api/users/id
 
 Gražina naudotoją pagal pateikiamą **id**.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
 
 
 #### Galimi atsako kodai
@@ -850,30 +621,13 @@ Gražina naudotoją pagal pateikiamą **id**.
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }
 
+
 #### POST api/users
 
 Sukuria naują naudotoją pagal pateiktus duomenis.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|name			 |Naudotojo vardas    		     |
-|email			 |Naudotojo prisijungimui naudojamas el-paštas|
-|role			 |Naudotojo rolė				 |
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |201	 		 |Gražina sukurtą naudotoją		 |
 
 #### Panaudojimo pavyzdžiai
@@ -904,24 +658,8 @@ Sukuria naują naudotoją pagal pateiktus duomenis.
 
 Koreguoja naudotojo su **id** turimus duomenis.
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|description     |Regiono aprašymas				 |
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200	 		 |Gražina koreguotą regioną	     |
 
 #### Panaudojimo pavyzdžiai
@@ -958,33 +696,6 @@ Koreguoja naudotojo su **id** turimus duomenis.
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }    
 
-#### DELETE api/users/id
-
-Panaikiną naudotojo su **id** įrašą.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|204	 		 |Nieko negražina			     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/users/**1**
-
-##### Atsakymas:
-
-Gražinamas 204 kodas
 
 ### Autentifikacija ir autorizacija
 
@@ -992,25 +703,8 @@ Gražinamas 204 kodas
 
 Naudotojas prisijungia prie sistemos
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|email			 |Naudotojo prisijungimo paštas  |
-|password		 |Naudotojo slaptažodis          |
-
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |200	 		 |Sėkmingai prisijungė		     |
 |401	 		 |Prisijungti nepavyko		     |
 
@@ -1046,60 +740,12 @@ Gražinama prieigos žetonas ir šio žetono atnaujinimo žetonas.
 	    "traceId": "00-977ff77494f66ac64de1f3efc7f93f54-3c59f865d27340c4-00"
     }
 
- #### DELETE auth/logout
-
-Panaikiną visus **refresh** ir **access** žetonus susyjusius su naudotoju.
-
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|204	 		 |Nieko negražina			     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/auth/logout
-
-##### Atsakymas:
-
-Gražinamas 204 kodas
-
  #### POST auth/register
 
 Užregistruojamas naujas naudotojas
 
-##### Reikalaujamos siuntimo antraštės:
-
-| Antraštė       |Reikšmė                        |
-|----------------|-------------------------------|
-|Authorization	 |JWT access token	             |
-|withCredentials |true				             |
-|Content-Type    |application/json				 |
-
-##### Reikalaujami siuntimo parametrai:
-
-| Parametras	 |Reikšmė                        |
-|----------------|-------------------------------|
-|email			 |Naudotojo paštas	 	         |
-|password		 |Naudotojo slaptažodis          |
-|role     		 |Naudotojo rolė				 |
-|name 			 |Naudotojo vardas				 |
-
-
 #### Galimi atsako kodai
 
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
 |201	 		 |Gražina sukurtą naudotoją	 	 |
 
 #### Panaudojimo pavyzdžiai
