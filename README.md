@@ -56,14 +56,14 @@ Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai pat
 
 | Wireframe | Realizacija|
 |-----------|------------|
-|![Header wireframe](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Home.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Home.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/header.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/header.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Login.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Login.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Register.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Register.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/CreateCinema.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/CreateCinema.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditCinema.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditCinema.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditMovie.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditMovie.png)|
-|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Screening.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Screening.png)|
+|![Header wireframe](https://github.com/NaktinisApuokas/FobumCinema/blob/main/List.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Home.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/wheader.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/header.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Form.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Login.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Form.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Register.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Form.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/CreateCinema.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Form.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditCinema.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Form.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditMovie.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/List.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Screening.png)|
 
 
 ---------------------------------------------------------------------------------------------------------------------
