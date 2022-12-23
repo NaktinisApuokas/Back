@@ -48,11 +48,13 @@ Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai pat
 
 • Serverio pusė - naudojant „ASP.NET“ karkasą. Duomenų bazė - „MySQL“. 
 
-![Sistemos diegimo diagrama](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/uml_deployment.png)
+![Sistemos diegimo diagrama](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/architektura.png)
 
 ---------------------------------------------------------------------------------------------------------------------
 
 ## Naudotojo sąsajos projektas:
+
+P.S. Įdėti langai kurie labiausiai skiriasi, kad nesikartotų informacija.
 
 | Wireframe | Realizacija|
 |-----------|------------|
