@@ -4,23 +4,28 @@
 ### Sistemos paskirtis:
 
 ##### Projekto tikslas: 
+
 Sudaryti tinklo aplikaciją, kurioje būtų galima matyti rodomus filmus skirtinguose kino 
 teatruose, o po to esant norui nusipirki bilietą į norimą seansą.
 
 ##### Tinklo aplikacijos veikimo principas: 
+
 Darbuotojas, kurio paskyrą sukuria administratorius, naudodamasis platforma turės 
 galimybę pridėti, pašalinti arba redaguoti norimus filmus, seansus arba kino teatrus. 
 Darbuotojas, norėdamas naudotis šia platforma, prisiregistruos prie internetinės aplikacijos. 
 Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai patvirtinti.
 
+---------------------------------------------------------------------------------------------------------------------
 
 ### Funkciniai reikalavimai
 
  #### Neregistruotas sistemos naudotojas galės: 
+ 
 1. Peržiūrėti rodomus filmus. 
 2. Prisijungti prie internetinės aplikacijos.
 
 #### Registruotas sistemos naudotojas galės: 
+
 1. Atsijungti nuo internetinės aplikacijos. 
 2. Prisijungti prie platformos. 
 3. Pridėti/Šalinti/Redaguoti filmą.
@@ -28,17 +33,24 @@ Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai pat
 5. Pridėti/Šalinti/Redaguoti seansą.
 
 #### Administratorius galės: 
+
 1. Sudaryti naujo darbuotojo paskyrą. 
 2. Šalinti naudotojus. 
 3. Patvirtinti naujus filmus bei kino teatrus.
 
+---------------------------------------------------------------------------------------------------------------------
+
 ## Sistemos architektūra
 
 #### Sistemos sudedamosios dalys: 
+
 • Kliento pusė - naudojant „React.js“ karkasą. 
+
 • Serverio pusė - naudojant „ASP.NET“ karkasą. Duomenų bazė - „MySQL“. 
 
 ![Sistemos diegimo diagrama](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/uml_deployment.png)
+
+---------------------------------------------------------------------------------------------------------------------
 
 ## Naudotojo sąsajos projektas:
 
@@ -54,18 +66,17 @@ Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai pat
 |![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_building.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_building_pic.png)|
 
 
+---------------------------------------------------------------------------------------------------------------------
 
 ## API specifkacija
 
-### Get
+### Get, GetById
 
 #### GET api/cinemas
 
 Gražina visus kino teatrus.
 
-#### Galimi atsako kodai
-
-|200	 		 |Gražina kino teatrų sąrašą    |
+#### Galimi atsako kodai : 200
 
 #### Panaudojimo pavyzdžiai
 
@@ -79,17 +90,10 @@ Gražina visus kino teatrus.
 
     [
 	    {
-		    "id": 1,
-		    "country": "Lietuva",
-		    "name": "Žemaitija",
-		    "description": "Regionas, kuriame dominuoja lygumos. Vasaros metu kritulių kiekis vidutinis. Regionas yra vakarų Lietuvoje"
-	    },
-	    {
-		    "id": 2,
-		    "country": "Lietuva",
-		    "name": "Aukštaitija",
-		    "description": "Didžiausias regionas Lietuvoje. Regionas yra šiaurės rytų Lietuvoje. Regione gausu ežerų."
-	    },
+		"id": 29,
+		"name": "update",
+		"address": "address"
+	    }
     ]
   **Kai duomenų bazė neturi duomenų:**
 
@@ -99,71 +103,57 @@ Gražina visus kino teatrus.
 
 Gražina nurodytą kino teatrą.
 
-
-#### Galimi atsako kodai
-
-|200	 		 |Gražina nurodytą kino teatrą   |
-|404			 |Kino teatras su **id** nerastas  |
+#### Galimi atsako kodai: 200, 404
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
-{domain}/api/cinemas/**1**
+
+/api/cinemas/**29**
 
 ##### Atsakymas:
 
 **Kai duomenų bazė turi duomenų:**
 
     {
-	    "id": 1,
-	    "country": "Lietuva",
-	    "name": "Žemaitija",
-	    "description": "Regionas, kuriame dominuoja lygumos. Vasaros metu kritulių kiekis vidutinis. Regionas yra vakarų Lietuvoje"
-    }
+		"id": 29,
+		"name": "update",
+		"address": "address"
+	}
   **Kai duomenų bazė neturi duomenų:**
 
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }
+Cinema with id '23' not found.
 
-#### GET api/regions/regionId/landplots
+#### GET api/cinemas/cinemasId/movies
 
-Gražina visus žemės plotus susietus su regionu, kurio id lygus **regionId**.
+Gražina visus filmus nurodytame kino teatre.
 
-#### Galimi atsako kodai
-
-|200|Gražina sąrašą su reikšmėmis
+#### Galimi atsako kodai: 200
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
 
-{domain}/api/regions/**1**/landplots
+/api/cinemas/**29**/movies
 
 ##### Atsakymas:
 
 **Kai duomenų bazė turi duomenų:**
 
     [
-	    {
-		    "id": 1,
-		    "address": "Vaižganto g. 1, 60150 Raseiniai",
-		    "owner": "Nerijus Duoba"
-	    },
-	    {
-		    "id": 2,
-		    "address": "Jotvingių g. 10, 60113 Raseiniai",
-		    "owner": "Gediminas Gilpa"
-	    },
-	    {
-		    "id": 3,
-		    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-		    "owner": "Rimantas Vauka"
-	    }
-    ]
+		{
+			"id": 3,
+			"title": "test",
+			"genre": "ttest",
+			"description": "test"
+		},
+		{
+			"id": 6,
+			"title": "title",
+			"genre": "fatastic",
+			"description": "awesome movie"
+		}
+	]
 
 **Kai duomenų bazė neturi duomenų:**
 
@@ -171,75 +161,64 @@ Gražina visus žemės plotus susietus su regionu, kurio id lygus **regionId**.
     
     
 
-#### GET api/regions/regionId/landplots/id
+#### GET api/cinemas/cinemasId/movies/id
 
-Gražina žemės plotą pagal **id**, kuris susietas su regionu, kurio id lygus **regionId**.
+Gražina nurodyta filmą, kuris yra rodomas nurodytame kino teatre.
 
-#### Galimi atsako kodai
-
-|200	 		 |Gražina sąrašą su reikšmėmis   |
-|404			 |Naudotojas su **id** nerastas  |
+#### Galimi atsako kodai: 200, 404
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
-{domain}/api/regions/**1**/landplots/**1**
+
+/api/cinemas/**1**/movies/**1**
 
 ##### Atsakymas:
 
 **Kai duomenų bazė turi duomenų:**
 
     {
-	    "id": 1,
-	    "address": "Vaižganto g. 1, 60150 Raseiniai",
-	    "owner": "Nerijus Duoba"
-    }
+		"id": 3,
+		"title": "test",
+		"genre": "ttest",
+		"description": "test"
+	}
 
   **Kai duomenų bazė neturi duomenų:**
 
     {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }
+		"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+		"title": "Not Found",
+		"status": 404,
+		"traceId": "00-c261ff51b08be0de5d1d832210c209bb-67c91b105bb5a507-00"
+	}
 
 
 
-#### GET api/regions/regionId/landplots/landplotId/buildings
+#### GET api/cinemas/cinemasId/movies/moviesId/screenings
 
-Gražina visus pastatus susietus su žemės plotu **landplotId** ir regionu, kurio id lygus **regionId**.
+Gražina visus seansus, nurodytame filme, kuris yra rodomas nurodytame kino teatre.
 
-#### Galimi atsako kodai
-
-|200|Gražina sąrašą su reikšmėmis
+#### Galimi atsako kodai: 200
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
 
-{domain}/api/regions/**1**/landplots/**1**/buildings
+/api/cinemas/**1**/movies/**1**/screening
 
 ##### Atsakymas:
 
 **Kai duomenų bazė turi duomenų:**
 
-        [
-		    {
-			    "id": 1,
-			    "name": "Silo 1",
-			    "type": "Grain",
-			    "size": 600,
-			    "occupancy": 600
-		    },
-		    {
-			    "id": 6,
-			    "name": "Silo_2",
-			    "type": "Barley",
-			    "size": 600,
-			    "occupancy": 240
-		    },
-        ]
+	[
+		{
+			"id": 5,
+			"hall": 4,
+			"seatnumber": 50,
+			"price": 5.5
+		}
+	]
 
 **Kai duomenų bazė neturi duomenų:**
 
@@ -247,65 +226,132 @@ Gražina visus pastatus susietus su žemės plotu **landplotId** ir regionu, kur
     
     
 
-#### GET api/regions/regionId/landplots/landplotId/buildings/id
+#### GET api/cinemas/cinemasId/movies/lmoviesId/screenings/id
 
-Gražina pastatą pagal **id**, kuris susietas su regionu ir žemės plotu, kurių id lygūs **regionId** ir **landplotId**.
+Gražina nurodytą seansą, nurodytame filme, kuris yra rodomas nurodytame kino teatre.
 
-#### Galimi atsako kodai
-
-|200	 		 |Gražina pastatą su reikšmėmis  |
-|404			 |Naudotojas su **id** nerastas  |
+#### Galimi atsako kodai: 200, 404
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
-{domain}/api/regions/**1**/landplots/**1**/buildings/**1**
+
+/api/cinemas/**1**/movies/**1**/screenings/**1**
 
 ##### Atsakymas:
 
 **Kai duomenų bazė turi duomenų:**
 
     {
-    	"id": 1,
-    	"name": "Silo 1",
-    	"type": "Grain",
-    	"size": 600,
-    	"occupancy": 600
-    }
+		"id": 5,
+		"hall": 4,
+		"seatnumber": 50,
+		"price": 5.5
+	}
 
   **Kai duomenų bazė neturi duomenų:**
 
     {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }
+		"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+		"title": "Not Found",
+		"status": 404,
+		"traceId": "00-9862c41b7cabe182e79d824b1e71ee27-67d7bd6fa9a1c9be-00"
+	}
 
 
+---------------------------------------------------------------------------------------------------------------------
+
+#### Post
+
+Visų Post galimi atsako kodai vienodi: 201
 
 
+#### POST api/cinemas
+
+Sukuria naują kino teatrą pagal pateiktus duomenis.
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+
+/api/cinemas
+
+##### JSON duomenys:
+
+    {
+		"name":"post",
+		"address":"address"
+	}
+
+##### Atsakymas:
+
+    {
+		"id": 50,
+		"name": "post",
+		"address": "address"
+	}
 
 
+#### POST api/cinemas/cinemasId/movies
+
+Sukuria naują filmą pagal pateiktus duomenis.
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+
+/api/cinemas/**1**/movies
+
+##### JSON duomenys:
+
+    {
+		"Title":"shrek",
+		"Genre":"fantasy",
+		"Description":"very good"
+	}
+
+##### Atsakymas:
+
+    {
+		"id": 7,
+		"title": "shrek",
+		"genre": "fantasy",
+		"description": "very good"
+	}
 
 
+#### POST api/cinemas/cinemasId/movies/moviesId/sreenings
+
+Sukuria naują seansą pagal pateiktus duomenis.
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+
+/api/cinemas/**1**/movies/**1**/sreenings
+
+##### JSON duomenys:
+
+    {
+		"hall":"10",
+		"seatnumber":"199",
+		"price":"10"
+	}
+
+##### Atsakymas:
+
+	{
+		"hall":"10",
+		"seatnumber":"199",
+		"price":"10"
+	}
 
 
-
-
-
-
-
+---------------------------------------------------------------------------------------------------------------------
 
 ### Delete
 
-Visų Delete galimi atsako kodai vienodi:
-
-#### Galimi atsako kodai
-
-
-|204	 		 |Gražina 204 statusą		     |
-
+Visų Delete galimi atsako kodai vienodi: 204
 
 #### DELETE api/cinemas/id
 
@@ -314,6 +360,7 @@ Panaikiną nurodytą kino teatrą.
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
+
 /api/cinemas/**1**
 
 ##### Atsakymas:
@@ -325,10 +372,10 @@ Gražinamas 204 kodas
 
 Panaikiną nurodytą filmą.
 
-
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
+
 /api/cinemas/**1**/movies/**1**
 
 ##### Atsakymas:
@@ -340,10 +387,10 @@ Gražinamas 204 kodas
 
 Panaikiną nurodytą seansą.
 
-
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
+
 /api/cinemas/**1**/movies/**1**/screening/**1**
 
 ##### Atsakymas:
@@ -351,224 +398,114 @@ Panaikiną nurodytą seansą.
 Gražinamas 204 kodas
 
 
+---------------------------------------------------------------------------------------------------------------------
 
+#### Put
 
+Visų Put galimi atsako kodai vienodi: 200
 
+#### PUT api/cinemas/id
 
-### Regionai
-
-
-
-#### POST api/regions
-
-Sukuria naują regioną pagal pateiktus duomenis.
-
-#### Galimi atsako kodai
-
-|201	 		 |Gražina sukurtą regioną	     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions
-
-##### JSON duomenys:
-
-    {
-	    "country": "Lenkija",
-	    "name": "Liubušas",
-	    "description": "Regionas šalia vandens"
-    }
-
-##### Atsakymas:
-
-    {
-	    "id": 7,
-	    "country": "Lenkija",
-	    "name": "Liubušas",
-	    "description": "Regionas šalia vandens"
-    }
-
-#### PATCH api/regions/id
-
-Koreguoja regiono su **id** turimus duomenis.
-
-#### Galimi atsako kodai
-
-|200	 		 |Gražina koreguotą regioną	     |
+Koreguoja nurodyta kino teatrą
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
 
-{domain}/api/regions/**7**
-##### JSON duomenys:
-
-    {
-	    "description": "Regionas šalia vandens"
-    }
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    {
-        "id": 7,
-        "country": "Lenkija",
-        "name": "Liubušas",
-        "description": "Regionas šalia vandens"
-    }
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }    
-
-
-
-
-### Žemės plotai
-
-
-
-#### POST api/regions/regionId/landplots
-
-#### Galimi atsako kodai
-
-|201	 		 |Gražina sukurtą žemės plotą 	 |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions/**1**/landplots
+/api/cinemas/**1**
 
 ##### JSON duomenys:
 
     {
-	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-	    "owner": "Rimantas Vauka"
-    }
-
-##### Atsakymas:
-
-    {
-	    "id": 3,
-	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-	    "owner": "Rimantas Vauka"
-    }
-
- 
-#### PATCH api/regions/regionId/landplots/id
-
-Koreguoja žemės ploto su **id** turimus duomenis.
-
-#### Galimi atsako kodai
-
-|200	 		 |Gražina koreguotą žemės plotą	 |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-
-{domain}/api/regions/**1**/landplots/**1**
-##### JSON duomenys:
-
-    {
-	    "owner": "Rimantas Vauka"
-    }
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    {
-	    "id": 3,
-	    "address": "Kunigaikščių g. 7, 60176 Raseiniai",
-	    "owner": "Rimantas Vauka"
-    }
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }    
-
-
-### Pastatai
-
-
-
-#### POST api/regions/regionId/landplots/landplotId/buildings
-
-#### Galimi atsako kodai
-
-|201	 		 |Gražina sukurtą pastatą	 |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/regions/**1**/landplots/**1**/buildings
-
-##### JSON duomenys:
-
-    {
-	    "name": "Silo_2",
-	    "type": "Barley",
-	    "size": 600,
-	    "occupancy": 125
-    }
-
-##### Atsakymas:
-
-	{
-	    "id": 1008,
-	    "name": "Silo_2",
-	    "type": "Barley",
-	    "size": 600,
-	    "occupancy": 125
+		"name":"update",
+		"address":"address"
 	}
 
+##### Atsakymas:
 
-#### PATCH api/regions/regionId/landplots/landplotId/buildings/id
+**Kai duomenų bazė turi duomenų:**
 
-Koreguoja pastato su **id** turimus duomenis.
+    {
+		"id" : "29",
+		"name":"update",
+		"address":"address"
+	}
 
-#### Galimi atsako kodai
+  **Kai duomenų bazė neturi duomenų:**
 
-|200	 		 |Gražina koreguotą pastatą	 |
+    {
+		"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+		"title": "Not Found",
+		"status": 404,
+		"traceId": "00-9862c41b7cabe182e79d824b1e71ee27-67d7bd6fa9a1c9be-00"
+	}   
+ 
+ 
+#### PUT api/cinemas/cinemasId/movies/id
+
+Koreguoja nurodyta filmą.
 
 #### Panaudojimo pavyzdžiai
 
 ##### Užklausa:
 
-{domain}/api/regions/**1**/landplots/**1**/buildings/**1**
+/api/cinemas/**1**/movies/**1**
 
 ##### JSON duomenys:
 
     {
-	    "type": "Grain",
-	    "size": 400,
-	    "occupancy": 250
-    }
+		"description":"update"
+	}
 
 ##### Atsakymas:
 
 **Kai duomenų bazė turi duomenų:**
 
     {
-	    "id": 1,
-	    "name": "Silo_1",
-	    "type": "Grain",
-	    "size": 400,
-	    "occupancy": 250
-    }
+		"id": 5,
+		"title": "teat",
+		"genre": "teat",
+		"description": "update"
+	}
+
+  **Kai duomenų bazė neturi duomenų:**
+
+    {
+		"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+		"title": "Not Found",
+		"status": 404,
+		"traceId": "00-9862c41b7cabe182e79d824b1e71ee27-67d7bd6fa9a1c9be-00"
+	}    
+
+
+#### PUT api/cinemas/cinemasId/movies/moviesId/screenings/id
+
+Koreguoja nurodytą seansą.
+
+#### Panaudojimo pavyzdžiai
+
+##### Užklausa:
+
+/api/cinemas/**1**/movies/**1**/screenings/**1**
+
+##### JSON duomenys:
+
+    {
+		"hall":"10",
+		"seatnumber":"199",
+		"price":"10"
+	}
+
+##### Atsakymas:
+
+**Kai duomenų bazė turi duomenų:**
+
+    {
+		"id": 6,
+		"hall": 10,
+		"seatnumber": 199,
+		"price": 10
+	}
 
   **Kai duomenų bazė neturi duomenų:**
 
@@ -579,134 +516,15 @@ Koreguoja pastato su **id** turimus duomenis.
 	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
     }    
    
+---------------------------------------------------------------------------------------------------------------------
 
-### Naudotojai
-
-
-#### GET api/users/id
-
-Gražina naudotoją pagal pateikiamą **id**.
-
-
-#### Galimi atsako kodai
-
-| Atsako kodas 	 |Reikšmė                        |
-|----------------|-------------------------------|
-|200	 		 |Gražina naudotojo duomenis     |
-|404			 |Naudotojas su **id** nerastas  |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/users/**1**
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    {
-	    "id": 1,
-	    "name": "User first and last name",
-	    "email": "administrator@mail.com",
-	    "password": "$2a$11$beIOcDJWCI8Mh206tweaHeXzViULgBV3GlyV.N2c6OMu8q4pTLLxe",
-	    "role": "Administrator"
-    },
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }
-
-
-#### POST api/users
-
-Sukuria naują naudotoją pagal pateiktus duomenis.
-
-#### Galimi atsako kodai
-
-|201	 		 |Gražina sukurtą naudotoją		 |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-{domain}/api/users
-
-##### JSON duomenys:
-
-    {
-	    "name": "Naudotojas",
-	    "email": "administrator1@mail.com",
-	    "password": "pa55w0rd123",
-	    "role": "Administrator"
-    }
-
-##### Atsakymas:
-
-    {
-	    "id": 1,
-	    "name": "Naudotojas",
-	    "email": "administrator1@mail.com",
-	    "password": "$2a$11$beIOcDJWCI8Mh206tweaHeXzViULgBV3GlyV.N2c6OMu8q4pTLLxe",
-	    "role": "Administrator"
-    },
-
-#### PATCH api/users/id
-
-Koreguoja naudotojo su **id** turimus duomenis.
-
-#### Galimi atsako kodai
-
-|200	 		 |Gražina koreguotą regioną	     |
-
-#### Panaudojimo pavyzdžiai
-
-##### Užklausa:
-
-{domain}/api/users/**7**
-##### JSON duomenys:
-
-    {
-	    "name": "User name",
-	    "email": "manager@mail.com",
-	    "password": "pa55w0rd"
-    }
-
-##### Atsakymas:
-
-**Kai duomenų bazė turi duomenų:**
-
-    {
-        "id": 7,
-	    "name": "User name",
-	    "email": "manager@mail.com",
-	    "password": "pa55w0rd",
-	    "role": "Manager"
-    }
-
-  **Kai duomenų bazė neturi duomenų:**
-
-    {
-	    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-	    "title": "Not Found",
-	    "status": 404,
-	    "traceId": "00-8ef365ac0cc368046c207f2296be1b9f-4301ff3d14c9b82e-00"
-    }    
-
-
-### Autentifikacija ir autorizacija
+### Autentifikacija
 
  #### POST auth/login
 
 Naudotojas prisijungia prie sistemos
 
-#### Galimi atsako kodai
-
-|200	 		 |Sėkmingai prisijungė		     |
-|401	 		 |Prisijungti nepavyko		     |
+#### Galimi atsako kodai: 201, 404
 
 #### Panaudojimo pavyzdžiai
 
@@ -717,19 +535,17 @@ Naudotojas prisijungia prie sistemos
 ##### JSON duomenys:
 
     {
-	    "email": "manager@mail.com",
-	    "password": "pa55w0rd",
-    }
+		"userName" : "TestName3",
+		"password" : "Verystrong1!"
+	}
 
 #### Atsakymas
 
 **Jei naudotojas egzistuoja**
-Gražinama prieigos žetonas ir šio žetono atnaujinimo žetonas.
 
     {
-	    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImFkbWluaXN0cmF0b3JAbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSm9uYXMgQnVsb8WhaXVzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYXRvciIsIm5iZiI6MTY2ODY5MDcyNCwiZXhwIjoxNjY4NzIwNzI0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTk0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5NCJ9.p6zZOitZlVtwu8CLl9sl_S4whuQkUFQUva5IFTNojpk",
-	    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2Njg2OTA3MjQsImV4cCI6MTY2ODc3NzEyNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5NCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxOTQifQ.gCQhhqPkVlbvmVkuEbFcIWF36nsGEJBMUqOIgjkwBTc"
-    }
+		"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdE5hbWUzIiwianRpIjoiMmZiMTQyNzEtYjY1Yi00MDk5LTkzYTQtNTRkZTQ5MzA0ZmU5IiwidXNlcklkIjoiZmM5ZDI2ZDctNGZlMS00NDZhLWFkZmEtYTZlZTEyNDI1MDczIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU2ltcGxlVXNlciIsImV4cCI6MTY3MTgwODU2NSwiaXNzIjoiU2ltb25hcyIsImF1ZCI6IlRydXN0ZWRDbGllbnQifQ.wyf0-40YRIOWx9HMvGg7YBD1PFXwmeHLfUzNbITB8qU"
+	}
 
 **Jei naudotojas neegzistuoja**
 
@@ -744,9 +560,7 @@ Gražinama prieigos žetonas ir šio žetono atnaujinimo žetonas.
 
 Užregistruojamas naujas naudotojas
 
-#### Galimi atsako kodai
-
-|201	 		 |Gražina sukurtą naudotoją	 	 |
+#### Galimi atsako kodai: 201
 
 #### Panaudojimo pavyzdžiai
 
@@ -755,25 +569,26 @@ Užregistruojamas naujas naudotojas
 
 ##### JSON duomenys:
 
-    {
-	    "name": "Naudotojas",
-	    "email": "administrator1@mail.com",
-	    "password": "pa55w0rd123",
-	    "role": "Administrator"
-    }
-
+	{
+		"userName" : "TestName3",
+		"email" : "testemail2@email.com",
+		"password" : "Verystrong1!"
+	}
+	
 ##### Atsakymas:
 
     {
-	    "id": 1,
-	    "name": "Naudotojas",
-	    "email": "administrator1@mail.com",
-	    "password": "$2a$11$beIOcDJWCI8Mh206tweaHeXzViULgBV3GlyV.N2c6OMu8q4pTLLxe",
-	    "role": "Administrator"
-    },
+		"id": "fc9d26d7-4fe1-446a-adfa-a6ee12425073",
+		"userName": "TestName3",
+		"email": "testemail2@email.com"
+	}
+
+---------------------------------------------------------------------------------------------------------------------
 
 ## Projekto išvados
 
-Projektinis darbas pavyko, nes sėkmingai buvo įgyvendinti funkciniai reikalavimai. Projekto realizavimo metu buvo susidurta su **CORS**(Cross-origin Resource Sharing) problema, kuri neleido bendrauti kliento pusės aplikacijai su serverio API. Taip pat dėl pasibaigusio Azure prenumeratos laiko teko sustabdyti tinkle veikusios aplikacijos veiklą.
+Funkcinius reikalavimus pavyko relizuoti. Daugiausiai sunkumų buvo kuriant front-end, dėl patirties stokos.
+Projekto realizavimo metu buvo susidurta su CORS problema, tačiau po kelių dienų kančių išspręndžiau problemą.
+Taip pat susiduriau su sunkumais susikurti duomenų bazę debesyje.
 
 
