@@ -56,14 +56,14 @@ Prieš pridėdant naują filmą arba kino teatrą, administratorius turi tai pat
 
 | Wireframe | Realizacija|
 |-----------|------------|
-|![Header wireframe](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/Header_component.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/Header_component_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/login.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/login_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/component_list.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/component_list_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/component_more.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/component_more_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/description.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/description_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_region.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_region_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/create_user.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/create_user_pic.png)|
-|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_building.png)|![enter image description here](https://github.com/lure110/Saitynu_projektas_Valda/blob/main/pictures/edit_building_pic.png)|
+|![Header wireframe](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Home.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Home.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/header.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/header.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Login.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Login.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Register.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Register.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/CreateCinema.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/CreateCinema.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditCinema.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditCinema.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditMovie.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/EditMovie.png)|
+|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Screening.png)|![enter image description here](https://github.com/NaktinisApuokas/FobumCinema/blob/main/Screening.png)|
 
 
 ---------------------------------------------------------------------------------------------------------------------
