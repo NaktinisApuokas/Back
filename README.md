@@ -1,6 +1,8 @@
 
 # Laboratorinio darbo ataskaita
 
+Airidas Šetkus IFF6-9
+
 ### Sistemos paskirtis:
 
 ##### Projekto tikslas: 
