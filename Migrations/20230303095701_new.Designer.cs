@@ -4,6 +4,7 @@ using FobumCinema.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FobumCinema.Migrations
 {
     [DbContext(typeof(FobumCinemaContext))]
-    partial class FobumCinemaContextModelSnapshot : ModelSnapshot
+    [Migration("20230303095701_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,23 +172,20 @@ namespace FobumCinema.Migrations
                     b.Property<DateTime>("CreationTimeUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Emptyseatnumber")
+                    b.Property<int>("Hall")
                         .HasColumnType("int");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Time")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("emptyseatnumber")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

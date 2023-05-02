@@ -2,6 +2,6 @@
 
 namespace FobumCinema.Data.Dtos.Screening
 {
-    public record CreateScreeningDto( [Required] int Hall, [Required] float Price, [Required] int Seatnumber);
+    public record CreateScreeningDto( [Required] string Time, [Required] string Price, [Required] int Emptyseatnumber);
 
 }
