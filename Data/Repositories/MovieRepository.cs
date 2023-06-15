@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FobumCinema.Data.Dtos.Movie;
 using FobumCinema.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FobumCinema.Data.Repositories
 {
     public interface IMovieRepository
     {
-        Task<Movie> GetAsync(int cinemaId, int movieId);
-        Task<List<Movie>> GetAsync(int cinemaId);
+        Task<Movie> GetAsync(int movieId);
+
+        Task<List<Movie>> GetAllAsync(int cinemaId);
+
         Task InsertAsync(Movie movie);
+
         Task UpdateAsync(Movie movie);
+
         Task DeleteAsync(Movie movie);
     }
 
@@ -24,12 +30,12 @@ namespace FobumCinema.Data.Repositories
             _FobumCinemaContext = fobumCinemaContext;
         }
 
-        public async Task<Movie> GetAsync(int cinemaId, int movieId)
+        public async Task<Movie> GetAsync(int movieId)
         {
-            return await _FobumCinemaContext.Movie.FirstOrDefaultAsync(o => o.CinemaId == cinemaId && o.Id == movieId);
+            return await _FobumCinemaContext.Movie.FirstOrDefaultAsync(o => o.Id == movieId);
         }
 
-        public async Task<List<Movie>> GetAsync(int cinemaId)
+        public async Task<List<Movie>> GetAllAsync(int cinemaId)
         {
             return await _FobumCinemaContext.Movie.Where(o => o.CinemaId == cinemaId).ToListAsync();
         }

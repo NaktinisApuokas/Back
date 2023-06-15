@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.Auth.Model;
 using FobumCinema.Data.Dtos.Screening;
 using FobumCinema.Data.Entities;
 using FobumCinema.Data.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.Controllers
@@ -27,14 +30,14 @@ namespace FobumCinema.Controllers
         [HttpGet]
         public async Task<IEnumerable<ScreeningDto>> GetAllAsync(int movieId)
         {
-            var movies = await _ScreeningRepository.GetAsync(movieId);
+            var movies = await _ScreeningRepository.GetAllAsync(movieId);
             return movies.Select(o => _mapper.Map<ScreeningDto>(o));
         }
 
         [HttpGet("{screeningId}")]
-        public async Task<ActionResult<ScreeningDto>> GetAsync(int movieId, int screeningId)
+        public async Task<ActionResult<ScreeningDto>> GetAsync(int screeningId)
         {
-            var movie = await _ScreeningRepository.GetAsync(movieId, screeningId);
+            var movie = await _ScreeningRepository.GetAsync(screeningId);
             if (movie == null) return NotFound();
 
             return Ok(_mapper.Map<ScreeningDto>(movie));
@@ -42,9 +45,10 @@ namespace FobumCinema.Controllers
 
         //insert
         [HttpPost]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<ScreeningDto>> PostAsync(int cinemaId, int movieId, CreateScreeningDto screeningDto)
         {
-            var movie = await _MovieRepository.GetAsync(movieId);
+            var movie = await _MovieRepository.GetAllAsync(movieId);
             if (movie == null) return NotFound($"Couldn't find a movie with id of {movieId}");
 
             var screening = _mapper.Map<Screening>(screeningDto);
@@ -59,10 +63,10 @@ namespace FobumCinema.Controllers
         [HttpPut("{screeningId}")]
         public async Task<ActionResult<ScreeningDto>> PostAsync(int movieId, int screeningId, UpdateScreeningDto screeningDto)
         {
-            var movie = await _MovieRepository.GetAsync(movieId);
+            var movie = await _MovieRepository.GetAllAsync(movieId);
             if (movie == null) return NotFound($"Couldn't find a movie with id of {movieId}");
 
-            var oldScreening = await _ScreeningRepository.GetAsync(movieId, screeningId);
+            var oldScreening = await _ScreeningRepository.GetAsync(screeningId);
             if (oldScreening == null)
                 return NotFound();
 
@@ -74,9 +78,9 @@ namespace FobumCinema.Controllers
         }
 
         [HttpDelete("{screeningId}")]
-        public async Task<ActionResult> DeleteAsync(int movieId, int screeningId)
+        public async Task<ActionResult> DeleteAsync(int screeningId)
         {
-            var screening = await _ScreeningRepository.GetAsync(movieId, screeningId);
+            var screening = await _ScreeningRepository.GetAsync(screeningId);
             if (screening == null)
                 return NotFound();
 

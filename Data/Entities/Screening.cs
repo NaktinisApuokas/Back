@@ -9,7 +9,6 @@ namespace FobumCinema.Data.Entities
         public int Emptyseatnumber { get; set; }
         public string Price { get; set; }
         public string Url { get; set; }
-        public DateTime CreationTimeUtc { get; set; }
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
     }

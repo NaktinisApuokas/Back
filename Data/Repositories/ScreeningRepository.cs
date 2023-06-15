@@ -8,8 +8,8 @@ namespace FobumCinema.Data.Repositories
 {
     public interface IScreeningRepository
     {
-        Task<Screening> GetAsync(int movieId, int screeningId);
-        Task<List<Screening>> GetAsync(int movieId);
+        Task<Screening> GetAsync(int screeningId);
+        Task<List<Screening>> GetAllAsync(int movieId);
         Task InsertAsync(Screening screening);
         Task UpdateAsync(Screening screening);
         Task DeleteAsync(Screening screening);
@@ -24,12 +24,12 @@ namespace FobumCinema.Data.Repositories
             _FobumCinemaContext = fobumCinemaContext;
         }
 
-        public async Task<Screening> GetAsync(int movieId, int screeningId)
+        public async Task<Screening> GetAsync(int screeningId)
         {
-            return await _FobumCinemaContext.Screening.FirstOrDefaultAsync(o => o.MovieId == movieId && o.Id == screeningId);
+            return await _FobumCinemaContext.Screening.FirstOrDefaultAsync(o => o.Id == screeningId);
         }
 
-        public async Task<List<Screening>> GetAsync(int movieId)
+        public async Task<List<Screening>> GetAllAsync(int movieId)
         {
             return await _FobumCinemaContext.Screening.Where(o => o.MovieId == movieId).ToListAsync();
         }

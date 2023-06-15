@@ -28,14 +28,14 @@ namespace FobumCinema.Controllers
         [HttpGet]
         public async Task<IEnumerable<MovieDto>> GetAllAsync(int cinemaId)
         {
-            var movies = await _MovieRepository.GetAsync(cinemaId);
+            var movies = await _MovieRepository.GetAllAsync(cinemaId);
             return movies.Select(o => _mapper.Map<MovieDto>(o));
         }
 
         [HttpGet("{movieId}")]
-        public async Task<ActionResult<MovieDto>> GetAsync(int cinemaId, int movieId)
+        public async Task<ActionResult<MovieDto>> GetAsync(int movieId)
         {
-            var movie = await _MovieRepository.GetAsync(cinemaId, movieId);
+            var movie = await _MovieRepository.GetAsync(movieId);
             if (movie == null) return NotFound();
 
             return Ok(_mapper.Map<MovieDto>(movie));
@@ -61,7 +61,7 @@ namespace FobumCinema.Controllers
             var cinema = await _CinemaRepository.Get(CinemaId);
             if (cinema == null) return NotFound($"Couldn't find a movie with id of {CinemaId}");
 
-            var oldMovie = await _MovieRepository.GetAsync(CinemaId, movieId);
+            var oldMovie = await _MovieRepository.GetAsync(movieId);
             if (oldMovie == null)
                 return NotFound();
 
@@ -73,9 +73,9 @@ namespace FobumCinema.Controllers
         }
 
         [HttpDelete("{movieId}")]
-        public async Task<ActionResult> DeleteAsync(int CinemaId, int movieId)
+        public async Task<ActionResult> DeleteAsync(int movieId)
         {
-            var movie = await _MovieRepository.GetAsync(CinemaId, movieId);
+            var movie = await _MovieRepository.GetAsync(movieId);
             if (movie == null)
                 return NotFound();
 

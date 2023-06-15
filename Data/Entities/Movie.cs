@@ -16,8 +16,6 @@ namespace FobumCinema.Data.Entities
 
         public string Duration { get; set; }
 
-        public DateTime CreationTimeUtc { get; set; }
-
         public int CinemaId { get; set; }
 
         public Cinema Cinema { get; set; }

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\airid\\OneDrive\\Desktop\\Bakis\\Back\\BakisBack\\FobumCinema.csproj": {}
+    "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj": {}
   },
   "projects": {
-    "C:\\Users\\airid\\OneDrive\\Desktop\\Bakis\\Back\\BakisBack\\FobumCinema.csproj": {
+    "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\airid\\OneDrive\\Desktop\\Bakis\\Back\\BakisBack\\FobumCinema.csproj",
+        "projectUniqueName": "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj",
         "projectName": "FobumCinema",
-        "projectPath": "C:\\Users\\airid\\OneDrive\\Desktop\\Bakis\\Back\\BakisBack\\FobumCinema.csproj",
-        "packagesPath": "C:\\Users\\airid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\airid\\OneDrive\\Desktop\\Bakis\\Back\\BakisBack\\obj\\",
+        "projectPath": "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj",
+        "packagesPath": "C:\\Users\\namek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\namek\\Desktop\\BakisBack\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\airid\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\namek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoFixture": {
+              "target": "Package",
+              "version": "[4.18.0, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.0, )"
@@ -51,6 +51,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.11.0, )"
             },
             "HtmlAgilityPack": {
               "target": "Package",
@@ -89,6 +93,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.11, )"
+            },
+            "NSubstitute": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
             }
           },
           "imports": [
@@ -110,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
