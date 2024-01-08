@@ -336,7 +336,7 @@ namespace FobumCinema.Migrations
             modelBuilder.Entity("FobumCinema.Data.Entities.Screening", b =>
                 {
                     b.HasOne("FobumCinema.Data.Entities.Movie", "Movie")
-                        .WithMany()
+                        .WithMany("Screenings")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -393,6 +393,11 @@ namespace FobumCinema.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FobumCinema.Data.Entities.Movie", b =>
+                {
+                    b.Navigation("Screenings");
                 });
 #pragma warning restore 612, 618
         }

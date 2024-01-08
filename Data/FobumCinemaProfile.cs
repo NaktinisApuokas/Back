@@ -18,6 +18,7 @@ namespace FobumCinema.Data
             CreateMap<CreateMovieDto, Movie>();
             CreateMap<UpdateMovieDto, Movie>();
             CreateMap<Movie, MovieDto>();
+            CreateMap<Movie, GeneralMovieDto>();
 
             CreateMap<CreateScreeningDto, Screening>();
             CreateMap<UpdateScreeningDto, Screening>();

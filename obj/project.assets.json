@@ -5059,11 +5059,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj",
+      "projectUniqueName": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
       "projectName": "FobumCinema",
-      "projectPath": "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj",
+      "projectPath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
       "packagesPath": "C:\\Users\\namek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\namek\\Desktop\\BakisBack\\obj\\",
+      "outputPath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\namek\\AppData\\Roaming\\NuGet\\NuGet.Config",

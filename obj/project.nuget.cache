@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hlJhst3GhtpGJNVSGEm6dCEEIuT0TiGXViyc3yxU0GPfiAEj27ZCWUyIQjbU3YFccdoAPW5XkPf/rnvLn7RbGg==",
+  "dgSpecHash": "mNcMtlesXWLeGlKw62M1Y4aFD7trzem2g5uwVAdC2wRvd2c59VEouZ5xWNqkQHFcFe7iZW5aFMG2HcxRHg5Tiw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\namek\\Desktop\\BakisBack\\FobumCinema.csproj",
+  "projectFilePath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\namek\\.nuget\\packages\\autofixture\\4.18.0\\autofixture.4.18.0.nupkg.sha512",
     "C:\\Users\\namek\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",

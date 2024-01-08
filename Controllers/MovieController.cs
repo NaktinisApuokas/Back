@@ -15,20 +15,27 @@ namespace FobumCinema.Controllers
     {
         private readonly IMovieRepository _MovieRepository;
         private readonly ICinemaRepository _CinemaRepository;
+        private readonly IScreeningRepository _ScreeningRepository;
         private readonly IMapper _mapper;
         
 
-        public MovieController(IMovieRepository MovieRepository, IMapper mapper, ICinemaRepository CinemaRepository)
+        public MovieController(IMovieRepository MovieRepository, IScreeningRepository ScreeningRepository, IMapper mapper, ICinemaRepository CinemaRepository)
         {
             _MovieRepository = MovieRepository;
             _mapper = mapper;
             _CinemaRepository = CinemaRepository;
+            _ScreeningRepository = ScreeningRepository;
         }
 
         [HttpGet]
         public async Task<IEnumerable<MovieDto>> GetAllAsync(int cinemaId)
         {
             var movies = await _MovieRepository.GetAllAsync(cinemaId);
+            foreach (var movie in movies)
+            {
+                var screenings = await _ScreeningRepository.GetAllAsync(movie.Id);
+                movie.Screenings = screenings;
+            }
             return movies.Select(o => _mapper.Map<MovieDto>(o));
         }
 
