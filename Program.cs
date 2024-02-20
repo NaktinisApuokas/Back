@@ -15,7 +15,7 @@ namespace FobumCinema
             using var scope = host.Services.CreateScope();
             var dbSeeder = (DatabaseSeeder)scope.ServiceProvider.GetService(typeof(DatabaseSeeder));
             await dbSeeder.SeedAsync();
-
+            await dbSeeder.ScrapeData();
             await host.RunAsync();
         }
 

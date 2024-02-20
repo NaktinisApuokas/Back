@@ -11,8 +11,10 @@ namespace FobumCinema.Data.Repositories
         Task<Screening> GetAsync(int screeningId);
         Task<List<Screening>> GetAllAsync(int movieId);
         Task InsertAsync(Screening screening);
+        Task InsertRangeAsync(List<Screening> screenings);
         Task UpdateAsync(Screening screening);
         Task DeleteAsync(Screening screening);
+        Task DeleteAllAsync();
     }
 
     public class ScreeningRepository : IScreeningRepository
@@ -40,6 +42,12 @@ namespace FobumCinema.Data.Repositories
             await _FobumCinemaContext.SaveChangesAsync();
         }
 
+        public async Task InsertRangeAsync(List<Screening> screenings)
+        {
+            _FobumCinemaContext.Screening.AddRange(screenings);
+            await _FobumCinemaContext.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync(Screening screening)
         {
             _FobumCinemaContext.Screening.Update(screening);
@@ -49,6 +57,12 @@ namespace FobumCinema.Data.Repositories
         public async Task DeleteAsync(Screening screening)
         {
             _FobumCinemaContext.Screening.Remove(screening);
+            await _FobumCinemaContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAllAsync()
+        {
+            _FobumCinemaContext.Screening.RemoveRange(_FobumCinemaContext.Screening);
             await _FobumCinemaContext.SaveChangesAsync();
         }
     }
