@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data;
 using AutoMapper;
 using FobumCinema.Auth.Model;
 using FobumCinema.Data.Dtos.Screening;

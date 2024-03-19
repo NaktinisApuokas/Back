@@ -16,7 +16,7 @@ namespace FobumCinema.Data.Repositories
 
         Task<Movie> GetByCinemaIdAndTitleAsync(int cinemaId, string title);
 
-        Task InsertAsync(Movie movie);
+        Task<Movie> InsertAsync(Movie movie);
 
         Task UpdateAsync(Movie movie);
 
@@ -46,10 +46,11 @@ namespace FobumCinema.Data.Repositories
             return await _FobumCinemaContext.Movie.FirstOrDefaultAsync(o => o.CinemaId == cinemaId && o.Title == title);
         }
 
-        public async Task InsertAsync(Movie movie)
+        public async Task<Movie> InsertAsync(Movie movie)
         {
             _FobumCinemaContext.Movie.Add(movie);
-            await _FobumCinemaContext.SaveChangesAsync();
+             await _FobumCinemaContext.SaveChangesAsync();
+            return movie;
         }
 
         public async Task UpdateAsync(Movie movie)

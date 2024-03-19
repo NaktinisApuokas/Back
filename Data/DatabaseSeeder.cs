@@ -56,7 +56,7 @@ namespace FobumCinema.Data
         {
             await DeleteScreenings();
 
-            await ScrapeForumCinemaData(2, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
+            await ScrapeForumCinemaData(1, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
         }
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
         {
@@ -109,20 +109,35 @@ namespace FobumCinema.Data
 
                         var durationNode = newDoc.DocumentNode.SelectSingleNode(".//b[contains(text(), 'min')]");
 
-                        var movie = new Movie
+                        Movie movie2 = await _MovieRepository.GetByCinemaIdAndTitleAsync(CinemaID, titleNode.InnerText.Trim());
+
+                        int MovieID = 0;
+
+                        if(movie2 != null)
                         {
-                            Id = random.Next(99999999),
-                            Title = titleNode.InnerText.Trim(),
-                            Img = imgNode.Attributes["src"].Value,
-                            Genre = secondGenreNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
-                            CinemaId = CinemaID,
-                            Duration = durationNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
-                            Description = descriptionNode?.InnerText.Trim()
-                        };
-                        Movies.Add(movie);
+                            MovieID = movie2.Id;
+                        }
+
+                        if (movie2 == null)
+                        {
+                            var movie = new Movie
+                            {
+                                Title = titleNode.InnerText.Trim(),
+                                Img = imgNode.Attributes["src"].Value,
+                                Genre = secondGenreNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
+                                CinemaId = CinemaID,
+                                Duration = durationNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
+                                Description = descriptionNode?.InnerText.Trim()
+                            };
+                            Movies.Add(movie);
+
+                            Movie movie3 = await _MovieRepository.InsertAsync(movie);
+                            MovieID = movie3.Id;
+                        }
+
 
                         var screenings = list.SelectNodes(".//li[@class='showTime']");
-                        if (screenings != null)
+                        if (screenings != null && MovieID != 0)
                         {
                             foreach (var screening in screenings)
                             {
@@ -144,11 +159,10 @@ namespace FobumCinema.Data
 
                                 var screeningObj = new Screening
                                 {
-                                    Id = random.Next(99999999),
                                     Time = screening.InnerText.Trim(),
-                                    Emptyseatnumber = Convert.ToInt16(EmptySeats.InnerText.Trim()),
+                                    Emptyseatnumber = EmptySeats == null ? 0 :  Convert.ToInt16(EmptySeats.InnerText.Trim()),
                                     Price = priceNode?.InnerText.Trim(),
-                                    MovieId = movie.Id,
+                                    MovieId = MovieID,
                                     Url = newTimeNode.Attributes["href"].Value
                                 };
                                 Screenings.Add(screeningObj);
@@ -156,7 +170,9 @@ namespace FobumCinema.Data
                         }
                     }
                 }
-                FormatData(Movies, Screenings);
+                await _ScreeningRepository.InsertRangeAsync(Screenings);
+
+               // await FormatData(Movies, Screenings);
             }
         }
         public async Task DeleteScreenings()
@@ -164,23 +180,22 @@ namespace FobumCinema.Data
             await _ScreeningRepository.DeleteAllAsync();
         }
 
-        public async Task FormatData(List<Movie> Movies, List<Screening> Screenings)
-        {
-            foreach (Movie movie in Movies)
-            {
-                Movie movie2 = await _MovieRepository.GetByCinemaIdAndTitleAsync(movie.CinemaId, movie.Title);
+        //public async Task FormatData(List<Movie> Movies, List<Screening> Screenings)
+        //{
+        //    foreach (Movie movie in Movies)
+        //    {
 
-                if (movie2 == null)
-                {
-                    await _MovieRepository.InsertAsync(movie);
-                }
-                else
-                {
-                    Screenings.Where(o => o.MovieId == movie2.Id).ToList().ForEach(o => o.MovieId = movie2.Id);
-                }
-            }
+        //        if (movie2 == null)
+        //        {
+        //            Movie movie3 = await _MovieRepository.InsertAsync(movie);
+        //            Screenings.Where(o => o.MovieId == movie.Id).ToList().ForEach(o => o.MovieId = movie3.Id);
+        //        }
+        //        else
+        //        {
+        //            Screenings.Where(o => o.MovieId == movie2.Id).ToList().ForEach(o => o.MovieId = movie2.Id);
+        //        }
+        //    }
 
-            await _ScreeningRepository.InsertRangeAsync(Screenings);
-        }
+        //}
     }
 }
