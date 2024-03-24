@@ -8,10 +8,11 @@ namespace FobumCinema.Data.Repositories
 {
     public interface ICommentRatingRepository
     {
+        
+        Task<CommentRating> GetByNameAndIdAsync(int commentId, string name);
         Task<CommentRating> GetAsync(int commentRatingId);
         Task<List<CommentRating>> GetAllAsync(int movieId);
         Task InsertAsync(CommentRating commentRating);
-        Task InsertRangeAsync(List<CommentRating> commentRatings);
         Task UpdateAsync(CommentRating commentRating);
     }
 
@@ -29,6 +30,11 @@ namespace FobumCinema.Data.Repositories
             return await _FobumCinemaContext.CommentRating.FirstOrDefaultAsync(o => o.Id == commentRatingId);
         }
 
+        public async Task<CommentRating> GetByNameAndIdAsync(int commentId, string name)
+        {
+            return await _FobumCinemaContext.CommentRating.FirstOrDefaultAsync(o => o.CommentId == commentId && o.Username == name);
+        }
+
         public async Task<List<CommentRating>> GetAllAsync(int commentId)
         {
             return await _FobumCinemaContext.CommentRating.Where(o => o.CommentId == commentId).ToListAsync();
@@ -37,12 +43,6 @@ namespace FobumCinema.Data.Repositories
         public async Task InsertAsync(CommentRating commentRating)
         {
             _FobumCinemaContext.CommentRating.Add(commentRating);
-            await _FobumCinemaContext.SaveChangesAsync();
-        }
-
-        public async Task InsertRangeAsync(List<CommentRating> commentRatings)
-        {
-            _FobumCinemaContext.CommentRating.AddRange(commentRatings);
             await _FobumCinemaContext.SaveChangesAsync();
         }
 

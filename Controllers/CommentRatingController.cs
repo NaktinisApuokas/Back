@@ -36,24 +36,20 @@ namespace FobumCinema.Controllers
             return Ok(_mapper.Map<CommentRatingDto>(commentRating));
         }
 
-        //insert
-        [HttpPost]
-        public async Task<ActionResult<CommentRatingDto>> PostAsync(CreateCommentRatingDto commentRatingDto)
-        {
-            CommentRating commentRating = _mapper.Map<CommentRating>(commentRatingDto);
 
-            await _CommentRatingRepository.InsertAsync(commentRating);
-
-            return Created($"/api/commentRatings/{commentRating.Id}", _mapper.Map<CommentRatingDto>(commentRating));
-        }
-
-        //update
         [HttpPut("{commentRatingId}")]
-        public async Task<ActionResult<CommentRatingDto>> PutAsync(int commentRatingId, UpdateCommentRatingDto commentRatingDto)
+        public async Task<ActionResult<CommentRatingDto>> ManageAsync(CreateMovieMarkDto commentRatingDto)
         {
-            var oldCommentRating = await _CommentRatingRepository.GetAsync(commentRatingId);
-            if (oldCommentRating == null)
-                return NotFound();
+
+            var oldCommentRating = await _CommentRatingRepository.GetByNameAndIdAsync(commentRatingDto.CommentId, commentRatingDto.Username);
+            if (oldCommentRating != null)
+            {
+                CommentRating createCommentRating = _mapper.Map<CommentRating>(commentRatingDto);
+
+                await _CommentRatingRepository.InsertAsync(createCommentRating);
+
+                return Created($"/api/commentRatings/{oldCommentRating.Id}", _mapper.Map<CommentRatingDto>(oldCommentRating));
+            }
 
             _mapper.Map(commentRatingDto, oldCommentRating);
 

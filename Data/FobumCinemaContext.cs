@@ -12,6 +12,7 @@ namespace FobumCinema.Data
         public DbSet<Screening> Screening { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<CommentRating> CommentRating { get; set; }
+        public DbSet<MovieMark> MovieMark { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

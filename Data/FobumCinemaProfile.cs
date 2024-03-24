@@ -32,8 +32,7 @@ namespace FobumCinema.Data
             CreateMap<Comment, CommentDto>();
 
 
-            CreateMap<CreateCommentRatingDto, CommentRating>();
-            CreateMap<UpdateCommentRatingDto, CommentRating>();
+            CreateMap<CreateMovieMarkDto, CommentRating>();
             CreateMap<CommentRating, CommentRatingDto>();
 
             CreateMap<FobumCinemaUser, UserDto>();
