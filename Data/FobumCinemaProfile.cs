@@ -4,6 +4,7 @@ using FobumCinema.Data.Dtos.Cinema;
 using FobumCinema.Data.Dtos.Comment;
 using FobumCinema.Data.Dtos.CommentRating;
 using FobumCinema.Data.Dtos.Movie;
+using FobumCinema.Data.Dtos.Review;
 using FobumCinema.Data.Dtos.Screening;
 using FobumCinema.Data.Entities;
 
@@ -30,6 +31,10 @@ namespace FobumCinema.Data
             CreateMap<CreateCommentDto, Comment>();
             CreateMap<UpdateCommentDto, Comment>();
             CreateMap<Comment, CommentDto>();
+
+            CreateMap<CreateReviewDto, Review>();
+            CreateMap<UpdateReviewDto, Review>();
+            CreateMap<Review, ReviewDto>();
 
 
             CreateMap<CreateMovieMarkDto, CommentRating>();

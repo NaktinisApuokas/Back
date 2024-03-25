@@ -68,6 +68,8 @@ namespace FobumCinema
             services.AddTransient<IScreeningRepository, ScreeningRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<ICommentRatingRepository, CommentRatingRepository>();
+            services.AddTransient<IMovieMarkRepository, MovieMarkRepository>();
+            services.AddTransient<IReviewRepository, ReviewRepository>();
             services.AddTransient<ITokenManager, TokenManager>();
             services.AddTransient<DatabaseSeeder, DatabaseSeeder>();
         }

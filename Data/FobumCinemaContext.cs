@@ -13,7 +13,7 @@ namespace FobumCinema.Data
         public DbSet<Comment> Comment { get; set; }
         public DbSet<CommentRating> CommentRating { get; set; }
         public DbSet<MovieMark> MovieMark { get; set; }
-
+        public DbSet<Review> Review { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=test");
