@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq;
 using System.Security.Claims;
 using AutoMapper;
 using FobumCinema.Auth.Model;
@@ -17,19 +18,34 @@ namespace FobumCinema.Controllers
         private readonly IMovieRepository _MovieRepository;
         private readonly IMapper _mapper;
         private readonly ICommentRepository _CommentRepository;
+        private readonly ICommentRatingRepository _CommentRatingRepository;
 
-        public CommentController(IMovieRepository MovieRepository, IMapper mapper, ICommentRepository CommentRepository)
+        public CommentController(IMovieRepository MovieRepository, IMapper mapper, ICommentRepository CommentRepository, ICommentRatingRepository CommentRatingRepository)
         {
             _MovieRepository = MovieRepository;
             _mapper = mapper;
             _CommentRepository = CommentRepository;
+            _CommentRatingRepository = CommentRatingRepository;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CommentDto>> GetAllAsync(int movieId)
+        public async Task<IEnumerable<CommentDto>> GetAllAsync(int movieId, string name)
         {
-            var movies = await _CommentRepository.GetAllAsync(movieId);
-            return movies.Select(o => _mapper.Map<CommentDto>(o));
+            var comments = await _CommentRepository.GetAllAsync(movieId);
+            var commentDtos = new List<CommentDto>();
+
+            foreach (var comment in comments)
+            {
+                var ratings = await _CommentRatingRepository.GetAllAsync(comment.Id);
+                var totalScore = ratings.Sum(r => r.Score);
+
+                var rating = await _CommentRatingRepository.GetByNameAndIdAsync(comment.Id, name);
+                double score = rating?.Score ?? 0; 
+
+                commentDtos.Add(new CommentDto(comment.Id, comment.Text, comment.Username, totalScore, score));
+            }
+
+            return commentDtos;
         }
 
         [HttpGet("{commentId}")]

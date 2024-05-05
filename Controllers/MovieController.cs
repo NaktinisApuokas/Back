@@ -44,6 +44,26 @@ namespace FobumCinema.Controllers
             return movies.Select(o => _mapper.Map<MovieDto>(o));
         }
 
+        [HttpGet("favorite")]
+        public async Task<IEnumerable<MovieDto>> GetAllFavoriteAsync(int cinemaId, string name)
+        {
+            var movies = await _MovieRepository.GetAllAsync(cinemaId);
+            var moviesWithScreenings = new List<Movie>();
+
+            foreach (var movie in movies)
+            {
+                var movieMark = await _MovieMarkRepository.GetByMovieAndNameAsync(movie.Id, name);
+
+                if (movieMark != null)
+                {
+                    movie.IsMarked = true;
+                    moviesWithScreenings.Add(movie);
+                }
+            }
+
+            return moviesWithScreenings.Select(o => _mapper.Map<MovieDto>(o));
+        }
+
         [HttpGet("detailed")]
         public async Task<IEnumerable<MovieDto>> GetAllDetailedAsync(int cinemaId, string name)
         {

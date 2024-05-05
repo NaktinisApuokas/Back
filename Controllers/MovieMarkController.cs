@@ -1,18 +1,14 @@
 ﻿using System.Data;
 using AutoMapper;
-using FobumCinema.Auth.Model;
-using FobumCinema.Data.Dtos.Movie;
 using FobumCinema.Data.Dtos.MovieMark;
-using FobumCinema.Data.Dtos.Screening;
 using FobumCinema.Data.Entities;
 using FobumCinema.Data.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.Controllers
 {
     [ApiController]
-    [Route("api/cinemas/{CinemaId}/movies/{MovieId}/screening")]
+    [Route("api/cinemas/{CinemaId}/movies/{MovieId}/movieMark")]
     public class MovieMarkController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -44,7 +40,6 @@ namespace FobumCinema.Controllers
 
         //insert
         [HttpPost]
-        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<MovieMarkDto>> PostAsync(int cinemaId, int movieId, CreateMovieMarkDto movieMarkDto)
         {
             var movie = await _MovieRepository.GetAllAsync(movieId);
@@ -55,10 +50,10 @@ namespace FobumCinema.Controllers
 
             await _MovieMarkRepository.InsertAsync(movieMark);
 
-            return Created($"/api/cinemas/{cinemaId}/movies/{movieId}/screenings/{movieMark.Id}", _mapper.Map<MovieMarkDto>(movieMark));
+            return Created($"/api/cinemas/{cinemaId}/movies/{movieId}/movieMark/{movieMark.Id}", _mapper.Map<MovieMarkDto>(movieMark));
         }
 
-        [HttpDelete("{movieId}")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteAsync(int movieId, string username)
         {
             var movie = await _MovieMarkRepository.GetByMovieAndNameAsync(movieId, username);
