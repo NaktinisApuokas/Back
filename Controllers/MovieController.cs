@@ -45,10 +45,10 @@ namespace FobumCinema.Controllers
         }
 
         [HttpGet("favorite")]
-        public async Task<IEnumerable<MovieDto>> GetAllFavoriteAsync(int cinemaId, string name)
+        public async Task<IEnumerable<MovieDto>> GetAllFavoriteAsync(string name)
         {
-            var movies = await _MovieRepository.GetAllAsync(cinemaId);
-            var moviesWithScreenings = new List<Movie>();
+            var movies = await _MovieRepository.GetAllAsync();
+            var moviesWithMark = new List<Movie>();
 
             foreach (var movie in movies)
             {
@@ -57,11 +57,15 @@ namespace FobumCinema.Controllers
                 if (movieMark != null)
                 {
                     movie.IsMarked = true;
-                    moviesWithScreenings.Add(movie);
+
+                    var screenings = await _ScreeningRepository.GetAllAsync(movie.Id);
+                    movie.Screenings = screenings;
+
+                    moviesWithMark.Add(movie);
                 }
             }
 
-            return moviesWithScreenings.Select(o => _mapper.Map<MovieDto>(o));
+            return moviesWithMark.Select(o => _mapper.Map<MovieDto>(o));
         }
 
         [HttpGet("detailed")]
@@ -76,10 +80,13 @@ namespace FobumCinema.Controllers
 
                 var movieMark = await _MovieMarkRepository.GetByMovieAndNameAsync(movie.Id, name);
 
+                movie.IsMarked = false;
+
                 if (movieMark != null)
                 {
                     movie.IsMarked = true;
                 }
+
 
                 if (screenings.Any())
                 {
@@ -141,7 +148,7 @@ namespace FobumCinema.Controllers
 
             await _MovieRepository.DeleteAsync(movie);
 
-            return NoContent();
+            return Ok("Movie deleted successfully");
         }
     }
 }

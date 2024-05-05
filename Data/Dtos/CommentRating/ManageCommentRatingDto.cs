@@ -2,5 +2,5 @@
 
 namespace FobumCinema.Data.Dtos.CommentRating
 {
-    public record CreateMovieMarkDto([Required] int CommentId, [Required] double Score, [Required] string Username);
+    public record ManageCommentRatingDto([Required] int CommentId, [Required] double Score, [Required] string Username);
 }

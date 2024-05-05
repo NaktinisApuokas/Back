@@ -69,7 +69,7 @@ namespace FobumCinema.Controllers
 
             await _CommentRepository.InsertAsync(comment);
 
-            return Created($"/api/cinemas/{cinemaId}/movies/{movieId}/comments/{comment.Id}", _mapper.Map<CommentDto>(comment));
+            return Created($"/api/cinemas/{cinemaId}/movies/{movieId}/comments/{comment.Id}", comment.Id);
         }
 
         //update
@@ -99,7 +99,7 @@ namespace FobumCinema.Controllers
 
             await _CommentRepository.DeleteAsync(comment);
 
-            return NoContent();
+            return Ok("Cinema deleted successfully");
         }
     }
 }

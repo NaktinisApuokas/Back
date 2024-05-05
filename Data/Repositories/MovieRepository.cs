@@ -14,6 +14,7 @@ namespace FobumCinema.Data.Repositories
 
         Task<List<Movie>> GetAllAsync(int cinemaId);
 
+        Task<List<Movie>> GetAllAsync();
         Task<Movie> GetByCinemaIdAndTitleAsync(int cinemaId, string title);
 
         Task<Movie> InsertAsync(Movie movie);
@@ -40,6 +41,10 @@ namespace FobumCinema.Data.Repositories
         public async Task<List<Movie>> GetAllAsync(int cinemaId)
         {
             return await _FobumCinemaContext.Movie.Where(o => o.CinemaId == cinemaId).ToListAsync();
+        }
+        public async Task<List<Movie>> GetAllAsync()
+        {
+            return await _FobumCinemaContext.Movie.ToListAsync();
         }
         public async Task<Movie> GetByCinemaIdAndTitleAsync(int cinemaId, string title)
         {

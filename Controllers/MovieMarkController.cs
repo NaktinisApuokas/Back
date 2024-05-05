@@ -34,7 +34,7 @@ namespace FobumCinema.Controllers
         {
             var movieMark = await _MovieMarkRepository.GetAsync(movieMarkId);
             if (movieMark == null) return NotFound();
-
+             
             return Ok(_mapper.Map<MovieMarkDto>(movieMark));
         }
 

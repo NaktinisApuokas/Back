@@ -56,7 +56,7 @@ namespace FobumCinema.Data
         {
             await DeleteScreenings();
 
-            await ScrapeForumCinemaData(1, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
+            await ScrapeForumCinemaData(2003, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
         }
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
         {

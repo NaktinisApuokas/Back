@@ -49,7 +49,7 @@ namespace FobumCinema.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult<CommentRatingDto>> ManageAsync(CreateMovieMarkDto commentRatingDto)
+        public async Task<ActionResult<CommentRatingDto>> ManageAsync(ManageCommentRatingDto commentRatingDto)
         {
 
             var oldCommentRating = await _CommentRatingRepository.GetByNameAndIdAsync(commentRatingDto.CommentId, commentRatingDto.Username);

@@ -42,7 +42,7 @@ namespace FobumCinema.Controllers
 
         //insert
         [HttpPost]
-        [Authorize(Roles = UserRoles.SimpleUser)]
+        //[Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<ScreeningDto>> PostAsync(int cinemaId, int movieId, CreateScreeningDto screeningDto)
         {
             var movie = await _MovieRepository.GetAllAsync(movieId);
@@ -58,7 +58,7 @@ namespace FobumCinema.Controllers
 
         //update
         [HttpPut("{screeningId}")]
-        public async Task<ActionResult<ScreeningDto>> PostAsync(int movieId, int screeningId, UpdateScreeningDto screeningDto)
+        public async Task<ActionResult<ScreeningDto>> PutAsync(int movieId, int screeningId, UpdateScreeningDto screeningDto)
         {
             var movie = await _MovieRepository.GetAllAsync(movieId);
             if (movie == null) return NotFound($"Couldn't find a movie with id of {movieId}");
