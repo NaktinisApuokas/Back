@@ -96,7 +96,7 @@
           }
         }
       },
-      "HtmlAgilityPack/1.11.46": {
+      "HtmlAgilityPack/1.11.58": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/HtmlAgilityPack.dll": {
@@ -1094,6 +1094,19 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "NSubstitute/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -1127,6 +1140,25 @@
         },
         "build": {
           "build/NUnit.props": {}
+        }
+      },
+      "Selenium.WebDriver/4.20.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/WebDriver.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebDriver.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
       "System.Buffers/4.5.0": {
@@ -1857,14 +1889,14 @@
         "lib/netstandard2.1/FluentAssertions.xml"
       ]
     },
-    "HtmlAgilityPack/1.11.46": {
-      "sha512": "dLMn4EVfJBHWmWK4Uh0XGD76FPLHI0qr2Tm0s1m/xmgiHb1JUb9zB8AzO8HtrkBBlMN6JfCUBYddhqC0hZNR+g==",
+    "HtmlAgilityPack/1.11.58": {
+      "sha512": "/LzjIKoAWdyXOn6o+zJTN2qpNIwfaDWbSQ974pVRwnzHsUFohIOSILdtkPrSO6YC38MNj4nDbpr1RkVBDE1RWQ==",
       "type": "package",
-      "path": "htmlagilitypack/1.11.46",
+      "path": "htmlagilitypack/1.11.58",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "htmlagilitypack.1.11.46.nupkg.sha512",
+        "htmlagilitypack.1.11.58.nupkg.sha512",
         "htmlagilitypack.nuspec",
         "lib/Net35/HtmlAgilityPack.dll",
         "lib/Net35/HtmlAgilityPack.pdb",
@@ -3161,6 +3193,33 @@
         "netstandard.library.nuspec"
       ]
     },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "NSubstitute/5.0.0": {
       "sha512": "CWGy4oXvcJcZzL7m5Rr/eMSejFXMDq1RRMlsbL6eltS3AuN/d8GH3ZzUcuStQcCSlcx+hpsgTxdnb3lhozWG6w==",
       "type": "package",
@@ -3201,6 +3260,26 @@
         "lib/netstandard2.0/nunit.framework.xml",
         "nunit.3.13.3.nupkg.sha512",
         "nunit.nuspec"
+      ]
+    },
+    "Selenium.WebDriver/4.20.0": {
+      "sha512": "Z9rYD5t2d7nBhjluj5MxnrTqMjrfGDQSXWThIdBMwgpVCGTcHMYot7nWV3XoVnUtUBb5wrYag++GV9vq/evTZQ==",
+      "type": "package",
+      "path": "selenium.webdriver/4.20.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "build/Selenium.WebDriver.targets",
+        "buildTransitive/Selenium.WebDriver.targets",
+        "icon.png",
+        "lib/netstandard2.0/WebDriver.dll",
+        "lib/netstandard2.0/WebDriver.xml",
+        "manager/linux/selenium-manager",
+        "manager/macos/selenium-manager",
+        "manager/windows/selenium-manager.exe",
+        "selenium.webdriver.4.20.0.nupkg.sha512",
+        "selenium.webdriver.nuspec"
       ]
     },
     "System.Buffers/4.5.0": {
@@ -5040,7 +5119,7 @@
       "AutoMapper >= 12.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
       "FluentAssertions >= 6.11.0",
-      "HtmlAgilityPack >= 1.11.46",
+      "HtmlAgilityPack >= 1.11.58",
       "Microsoft.AspNetCore.Authentication >= 2.2.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.11",
       "Microsoft.AspNetCore.Cors >= 2.2.0",
@@ -5050,23 +5129,24 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.11",
       "NSubstitute >= 5.0.0",
-      "NUnit >= 3.13.3"
+      "NUnit >= 3.13.3",
+      "Selenium.WebDriver >= 4.20.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\namek\\.nuget\\packages\\": {}
+    "C:\\Users\\Airis\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
+      "projectUniqueName": "C:\\Users\\Airis\\Desktop\\Back\\FobumCinema.csproj",
       "projectName": "FobumCinema",
-      "projectPath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
-      "packagesPath": "C:\\Users\\namek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\obj\\",
+      "projectPath": "C:\\Users\\Airis\\Desktop\\Back\\FobumCinema.csproj",
+      "packagesPath": "C:\\Users\\Airis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Airis\\Desktop\\Back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\namek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Airis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5110,7 +5190,7 @@
           },
           "HtmlAgilityPack": {
             "target": "Package",
-            "version": "[1.11.46, )"
+            "version": "[1.11.58, )"
           },
           "Microsoft.AspNetCore.Authentication": {
             "target": "Package",
@@ -5153,6 +5233,10 @@
           "NUnit": {
             "target": "Package",
             "version": "[3.13.3, )"
+          },
+          "Selenium.WebDriver": {
+            "target": "Package",
+            "version": "[4.20.0, )"
           }
         },
         "imports": [
@@ -5174,7 +5258,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,219 @@
+Date : 2024-05-05 09:39:52
+Directory : c:\Users\Airis\Desktop\Back
+Total : 151 files,  157678 codes, 99 comments, 2388 blanks, all 160165 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |         30 |    149,693 |          0 |         15 |    149,708 |
+| C#         |        103 |      7,810 |         99 |      2,353 |     10,262 |
+| XML        |         12 |        102 |          0 |          5 |        107 |
+| Properties |          5 |         67 |          0 |          5 |         72 |
+| Markdown   |          1 |          6 |          0 |         10 |         16 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                         | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                            |        151 |    157,678 |         99 |      2,388 |    160,165 |
+| . (Files)                                                                                                    |          8 |     39,285 |          0 |         41 |     39,326 |
+| Auth                                                                                                         |          6 |        102 |          0 |         15 |        117 |
+| Auth (Files)                                                                                                 |          2 |         70 |          0 |          9 |         79 |
+| Auth\Model                                                                                                   |          4 |         32 |          0 |          6 |         38 |
+| Controllers                                                                                                  |          9 |        612 |         10 |        148 |        770 |
+| Data                                                                                                         |         43 |        804 |         16 |        201 |      1,021 |
+| Data (Files)                                                                                                 |          3 |        201 |         16 |         53 |        270 |
+| Data\Dtos                                                                                                    |         25 |        116 |          0 |         44 |        160 |
+| Data\Dtos\Auth                                                                                               |          5 |         26 |          0 |          7 |         33 |
+| Data\Dtos\Cinema                                                                                             |          3 |         13 |          0 |          6 |         19 |
+| Data\Dtos\Comment                                                                                            |          3 |         13 |          0 |          5 |         18 |
+| Data\Dtos\CommentRating                                                                                      |          2 |          9 |          0 |          3 |         12 |
+| Data\Dtos\Movie                                                                                              |          4 |         20 |          0 |         10 |         30 |
+| Data\Dtos\MovieMark                                                                                          |          2 |          9 |          0 |          3 |         12 |
+| Data\Dtos\Review                                                                                             |          3 |         13 |          0 |          5 |         18 |
+| Data\Dtos\Screening                                                                                          |          3 |         13 |          0 |          5 |         18 |
+| Data\Entities                                                                                                |          7 |         89 |          0 |         22 |        111 |
+| Data\Repositories                                                                                            |          8 |        398 |          0 |         82 |        480 |
+| Migrations                                                                                                   |         31 |      6,058 |         16 |      1,935 |      8,009 |
+| Properties                                                                                                   |          1 |         28 |          0 |          1 |         29 |
+| bin                                                                                                          |         17 |     86,727 |          0 |         10 |     86,737 |
+| bin\Debug                                                                                                    |         11 |     45,958 |          0 |          6 |     45,964 |
+| bin\Debug\net5.0                                                                                             |          5 |      5,190 |          0 |          2 |      5,192 |
+| bin\Debug\net6.0                                                                                             |          6 |     40,768 |          0 |          4 |     40,772 |
+| bin\Release                                                                                                  |          6 |     40,769 |          0 |          4 |     40,773 |
+| bin\Release\net6.0                                                                                           |          6 |     40,769 |          0 |          4 |     40,773 |
+| obj                                                                                                          |         36 |     24,062 |         57 |         37 |     24,156 |
+| obj (Files)                                                                                                  |          7 |      5,470 |          0 |          0 |      5,470 |
+| obj\Debug                                                                                                    |         20 |     18,524 |         45 |         29 |     18,598 |
+| obj\Debug\net5.0                                                                                             |          4 |         23 |         11 |          7 |         41 |
+| obj\Debug\net5.0 (Files)                                                                                     |          3 |         22 |         11 |          7 |         40 |
+| obj\Debug\net5.0\staticwebassets                                                                             |          1 |          1 |          0 |          0 |          1 |
+| obj\Debug\net6.0                                                                                             |         13 |     18,486 |         23 |         15 |     18,524 |
+| obj\Debug\net6.0 (Files)                                                                                     |         10 |     18,477 |         23 |         15 |     18,515 |
+| obj\Debug\net6.0\staticwebassets                                                                             |          3 |          9 |          0 |          0 |          9 |
+| obj\Debug\netcoreapp3.1                                                                                      |          3 |         15 |         11 |          7 |         33 |
+| obj\Release                                                                                                  |          9 |         68 |         12 |          8 |         88 |
+| obj\Release\net6.0                                                                                           |          9 |         68 |         12 |          8 |         88 |
+| obj\Release\net6.0 (Files)                                                                                   |          6 |         59 |         12 |          8 |         79 |
+| obj\Release\net6.0\staticwebassets                                                                           |          3 |          9 |          0 |          0 |          9 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                     | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\Airis\Desktop\Back\Auth\AuthHandler.cs                                                              | C#         |         18 |          0 |          3 |         21 |
+| c:\Users\Airis\Desktop\Back\Auth\Model\CustomClaims.cs                                                       | C#         |          8 |          0 |          1 |          9 |
+| c:\Users\Airis\Desktop\Back\Auth\Model\IUserOwnedresource.cs                                                 | C#         |          7 |          0 |          1 |          8 |
+| c:\Users\Airis\Desktop\Back\Auth\Model\PolicyNames.cs                                                        | C#         |          7 |          0 |          1 |          8 |
+| c:\Users\Airis\Desktop\Back\Auth\Model\UserRoles.cs                                                          | C#         |         10 |          0 |          3 |         13 |
+| c:\Users\Airis\Desktop\Back\Auth\TokenManager.cs                                                             | C#         |         52 |          0 |          6 |         58 |
+| c:\Users\Airis\Desktop\Back\Controllers\AuthController.cs                                                    | C#         |         59 |          0 |          7 |         66 |
+| c:\Users\Airis\Desktop\Back\Controllers\CinemaController.cs                                                  | C#         |         63 |          3 |         17 |         83 |
+| c:\Users\Airis\Desktop\Back\Controllers\CommentController.cs                                                 | C#         |         82 |          2 |         22 |        106 |
+| c:\Users\Airis\Desktop\Back\Controllers\CommentRatingController.cs                                           | C#         |         55 |          0 |         18 |         73 |
+| c:\Users\Airis\Desktop\Back\Controllers\GeneralMovieController.cs                                            | C#         |         40 |          0 |          5 |         45 |
+| c:\Users\Airis\Desktop\Back\Controllers\MovieController.cs                                                   | C#         |        118 |          0 |         30 |        148 |
+| c:\Users\Airis\Desktop\Back\Controllers\MovieMarkController.cs                                               | C#         |         55 |          1 |         13 |         69 |
+| c:\Users\Airis\Desktop\Back\Controllers\ReviewController.cs                                                  | C#         |         70 |          2 |         18 |         90 |
+| c:\Users\Airis\Desktop\Back\Controllers\ScreeningController.cs                                               | C#         |         70 |          2 |         18 |         90 |
+| c:\Users\Airis\Desktop\Back\Data\DatabaseSeeder.cs                                                           | C#         |        143 |         16 |         43 |        202 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Auth\FobumCinemaUser.cs                                                | C#         |          9 |          0 |          2 |         11 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Auth\LoginDto.cs                                                       | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Auth\LoginResponseDto.cs                                               | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Auth\RegisterDto.cs                                                    | C#         |          5 |          0 |          2 |          7 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Auth\UserDto.cs                                                        | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Cinema\CinemaDto.cs                                                    | C#         |          4 |          0 |          2 |          6 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Cinema\CreateCinemaDto.cs                                              | C#         |          5 |          0 |          2 |          7 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Cinema\UpdateCinemaDto.cs                                              | C#         |          4 |          0 |          2 |          6 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\CommentRating\CommentRatingDto.cs                                      | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\CommentRating\ManageCommentRatingDto.cs                                | C#         |          5 |          0 |          2 |          7 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Comment\CommentDto.cs                                                  | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Comment\CreateCommentDto.cs                                            | C#         |          5 |          0 |          3 |          8 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Comment\UpdateCommentDto.cs                                            | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\MovieMark\CreateMovieMarkDto.cs                                        | C#         |          5 |          0 |          2 |          7 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\MovieMark\MovieMarkDto.cs                                              | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Movie\CreateMovieDto.cs                                                | C#         |          5 |          0 |          3 |          8 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Movie\GeneralMovieDto.cs                                               | C#         |          6 |          0 |          3 |          9 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Movie\MovieDto.cs                                                      | C#         |          5 |          0 |          2 |          7 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Movie\UpdateMovieDto.cs                                                | C#         |          4 |          0 |          2 |          6 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Review\CreateReviewDto.cs                                              | C#         |          5 |          0 |          3 |          8 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Review\ReviewDto.cs                                                    | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Review\UpdateReviewDto.cs                                              | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Screening\CreateScreeningDto.cs                                        | C#         |          5 |          0 |          3 |          8 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Screening\ScreeningDto.cs                                              | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Dtos\Screening\UpdateScreeningDto.cs                                        | C#         |          4 |          0 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\Cinema.cs                                                          | C#         |         11 |          0 |          3 |         14 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\Comment.cs                                                         | C#         |         13 |          0 |          2 |         15 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\CommentRating.cs                                                   | C#         |         11 |          0 |          1 |         12 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\Movie.cs                                                           | C#         |         17 |          0 |         11 |         28 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\MovieMark.cs                                                       | C#         |         10 |          0 |          1 |         11 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\Review.cs                                                          | C#         |         13 |          0 |          2 |         15 |
+| c:\Users\Airis\Desktop\Back\Data\Entities\Screening.cs                                                       | C#         |         14 |          0 |          2 |         16 |
+| c:\Users\Airis\Desktop\Back\Data\FobumCinemaContext.cs                                                       | C#         |         21 |          0 |          1 |         22 |
+| c:\Users\Airis\Desktop\Back\Data\FobumCinemaProfile.cs                                                       | C#         |         37 |          0 |          9 |         46 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\CinemaRepository.cs                                            | C#         |         48 |          0 |         11 |         59 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\CommentRatingRepository.cs                                     | C#         |         46 |          0 |         10 |         56 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\CommentRepository.cs                                           | C#         |         59 |          0 |         11 |         70 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\GeneralMovieRepository.cs                                      | C#         |         26 |          0 |          4 |         30 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\MovieMarkRepository.cs                                         | C#         |         46 |          0 |         10 |         56 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\MovieRepository.cs                                             | C#         |         55 |          0 |         14 |         69 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\ReviewRepository.cs                                            | C#         |         59 |          0 |         11 |         70 |
+| c:\Users\Airis\Desktop\Back\Data\Repositories\ScreeningRepository.cs                                         | C#         |         59 |          0 |         11 |         70 |
+| c:\Users\Airis\Desktop\Back\FobumCinema.csproj                                                               | XML        |         30 |          0 |          5 |         35 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221125060028_Inil.Designer.cs                                       | C#         |         99 |          1 |         31 |        131 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221125060028_Inil.cs                                                | C#         |         87 |          0 |          9 |         96 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221127225147_identity.Designer.cs                                   | C#         |        285 |          1 |        103 |        389 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221127225147_identity.cs                                            | C#         |        199 |          0 |         22 |        221 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221207064224_add migration.Designer.cs                              | C#         |        315 |          1 |        113 |        429 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221207064224_add migration.cs                                       | C#         |        137 |          0 |         17 |        154 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221207082143_test.Designer.cs                                       | C#         |        316 |          1 |        113 |        430 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221207082143_test.cs                                                | C#         |         30 |          0 |          4 |         34 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221207091724_present.Designer.cs                                    | C#         |        315 |          1 |        113 |        429 |
+| c:\Users\Airis\Desktop\Back\Migrations\20221207091724_present.cs                                             | C#         |         30 |          0 |          4 |         34 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230303095701_new.Designer.cs                                        | C#         |        299 |          1 |        106 |        406 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230303095701_new.cs                                                 | C#         |         76 |          0 |         13 |         89 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230310060242_fixedScreenings.Designer.cs                            | C#         |        299 |          1 |        105 |        405 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230310060242_fixedScreenings.cs                                     | C#         |         60 |          0 |         10 |         70 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230425155936_AddedUrl.Designer.cs                                   | C#         |        302 |          1 |        106 |        409 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230425155936_AddedUrl.cs                                            | C#         |         23 |          0 |          4 |         27 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230503134001_removedCreatedTime.Designer.cs                         | C#         |        298 |          1 |        104 |        403 |
+| c:\Users\Airis\Desktop\Back\Migrations\20230503134001_removedCreatedTime.cs                                  | C#         |         33 |          0 |          6 |         39 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240317125333_Comments.Designer.cs                                   | C#         |        335 |          1 |        119 |        455 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240317125333_Comments.cs                                            | C#         |         51 |          0 |          6 |         57 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240317134451_Comments2.Designer.cs                                  | C#         |        336 |          1 |        119 |        456 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240317134451_Comments2.cs                                           | C#         |         80 |          0 |         16 |         96 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240317143243_Comments3.Designer.cs                                  | C#         |        329 |          1 |        115 |        445 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240317143243_Comments3.cs                                           | C#         |         46 |          0 |         10 |         56 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240319181247_CommentRating.Designer.cs                              | C#         |        355 |          1 |        125 |        481 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240319181247_CommentRating.cs                                       | C#         |         40 |          0 |          5 |         45 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240324141407_MovieMark.Designer.cs                                  | C#         |        381 |          1 |        135 |        517 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240324141407_MovieMark.cs                                           | C#         |         48 |          0 |          7 |         55 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240325183827_Review.Designer.cs                                     | C#         |        408 |          1 |        145 |        554 |
+| c:\Users\Airis\Desktop\Back\Migrations\20240325183827_Review.cs                                              | C#         |         40 |          0 |          5 |         45 |
+| c:\Users\Airis\Desktop\Back\Migrations\FobumCinemaContextModelSnapshot.cs                                    | C#         |        406 |          1 |        145 |        552 |
+| c:\Users\Airis\Desktop\Back\Program.cs                                                                       | C#         |         44 |          0 |         11 |         55 |
+| c:\Users\Airis\Desktop\Back\Properties\launchSettings.json                                                   | JSON       |         28 |          0 |          1 |         29 |
+| c:\Users\Airis\Desktop\Back\README.md                                                                        | Markdown   |          6 |          0 |         10 |         16 |
+| c:\Users\Airis\Desktop\Back\Startup.cs                                                                       | C#         |         85 |          0 |         11 |         96 |
+| c:\Users\Airis\Desktop\Back\appsettings.Development.json                                                     | JSON       |          8 |          0 |          1 |          9 |
+| c:\Users\Airis\Desktop\Back\appsettings.json                                                                 | JSON       |         15 |          0 |          1 |         16 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net5.0\FobumCinema.deps.json                                           | JSON       |      5,150 |          0 |          0 |      5,150 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net5.0\FobumCinema.runtimeconfig.dev.json                              | JSON       |          8 |          0 |          0 |          8 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net5.0\FobumCinema.runtimeconfig.json                                  | JSON       |         13 |          0 |          0 |         13 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net5.0\appsettings.Development.json                                    | JSON       |          9 |          0 |          1 |         10 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net5.0\appsettings.json                                                | JSON       |         10 |          0 |          1 |         11 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net6.0\FobumCinema.deps.json                                           | JSON       |      1,628 |          0 |          0 |      1,628 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net6.0\FobumCinema.runtimeconfig.json                                  | JSON       |         20 |          0 |          0 |         20 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net6.0\appsettings.Development.json                                    | JSON       |          8 |          0 |          1 |          9 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net6.0\appsettings.json                                                | JSON       |         15 |          0 |          1 |         16 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net6.0\package-lock.json                                               | JSON       |     39,052 |          0 |          1 |     39,053 |
+| c:\Users\Airis\Desktop\Back\bin\Debug\net6.0\package.json                                                    | JSON       |         45 |          0 |          1 |         46 |
+| c:\Users\Airis\Desktop\Back\bin\Release\net6.0\FobumCinema.deps.json                                         | JSON       |      1,628 |          0 |          0 |      1,628 |
+| c:\Users\Airis\Desktop\Back\bin\Release\net6.0\FobumCinema.runtimeconfig.json                                | JSON       |         21 |          0 |          0 |         21 |
+| c:\Users\Airis\Desktop\Back\bin\Release\net6.0\appsettings.Development.json                                  | JSON       |          8 |          0 |          1 |          9 |
+| c:\Users\Airis\Desktop\Back\bin\Release\net6.0\appsettings.json                                              | JSON       |         15 |          0 |          1 |         16 |
+| c:\Users\Airis\Desktop\Back\bin\Release\net6.0\package-lock.json                                             | JSON       |     39,052 |          0 |          1 |     39,053 |
+| c:\Users\Airis\Desktop\Back\bin\Release\net6.0\package.json                                                  | JSON       |         45 |          0 |          1 |         46 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net5.0\.NETCoreApp,Version=v5.0.AssemblyAttributes.cs                  | C#         |          3 |          1 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net5.0\FobumCinema.AssemblyInfo.cs                                     | C#         |          9 |         10 |          5 |         24 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net5.0\FobumCinema.GeneratedMSBuildEditorConfig.editorconfig           | Properties |         10 |          0 |          1 |         11 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net5.0\staticwebassets\FobumCinema.StaticWebAssets.xml                 | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs                  | C#         |          3 |          1 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\FobumCinema.AssemblyInfo.cs                                     | C#         |          9 |         10 |          5 |         24 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\FobumCinema.GeneratedMSBuildEditorConfig.editorconfig           | Properties |         19 |          0 |          1 |         20 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\FobumCinema.GlobalUsings.g.cs                                   | C#         |         16 |          1 |          1 |         18 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\FobumCinema.sourcelink.json                                     | JSON       |          1 |          0 |          0 |          1 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\PresentConnection.AssemblyInfo.cs                               | C#         |          9 |         10 |          5 |         24 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\PresentConnection.GeneratedMSBuildEditorConfig.editorconfig     | Properties |         16 |          0 |          1 |         17 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\PresentConnection.GlobalUsings.g.cs                             | C#         |         16 |          1 |          1 |         18 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\project.razor.json                                              | JSON       |     18,377 |          0 |          0 |     18,377 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\staticwebassets.build.json                                      | JSON       |         11 |          0 |          0 |         11 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\staticwebassets\msbuild.build.FobumCinema.props                 | XML        |          3 |          0 |          0 |          3 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.FobumCinema.props   | XML        |          3 |          0 |          0 |          3 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.FobumCinema.props       | XML        |          3 |          0 |          0 |          3 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\netcoreapp3.1\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs           | C#         |          3 |          1 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\netcoreapp3.1\FobumCinema.AssemblyInfo.cs                              | C#         |          9 |         10 |          5 |         24 |
+| c:\Users\Airis\Desktop\Back\obj\Debug\netcoreapp3.1\FobumCinema.GeneratedMSBuildEditorConfig.editorconfig    | Properties |          3 |          0 |          1 |          4 |
+| c:\Users\Airis\Desktop\Back\obj\FobumCinema.csproj.nuget.dgspec.json                                         | JSON       |        130 |          0 |          0 |        130 |
+| c:\Users\Airis\Desktop\Back\obj\FobumCinema.csproj.nuget.g.props                                             | XML        |         23 |          0 |          0 |         23 |
+| c:\Users\Airis\Desktop\Back\obj\FobumCinema.csproj.nuget.g.targets                                           | XML        |          6 |          0 |          0 |          6 |
+| c:\Users\Airis\Desktop\Back\obj\PresentConnection.csproj.nuget.dgspec.json                                   | JSON       |        106 |          0 |          0 |        106 |
+| c:\Users\Airis\Desktop\Back\obj\PresentConnection.csproj.nuget.g.props                                       | XML        |         22 |          0 |          0 |         22 |
+| c:\Users\Airis\Desktop\Back\obj\PresentConnection.csproj.nuget.g.targets                                     | XML        |          2 |          0 |          0 |          2 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs                | C#         |          3 |          1 |          1 |          5 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\FobumCinema.AssemblyInfo.cs                                   | C#         |          9 |         10 |          5 |         24 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\FobumCinema.GeneratedMSBuildEditorConfig.editorconfig         | Properties |         19 |          0 |          1 |         20 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\FobumCinema.GlobalUsings.g.cs                                 | C#         |         16 |          1 |          1 |         18 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\FobumCinema.sourcelink.json                                   | JSON       |          1 |          0 |          0 |          1 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\staticwebassets.build.json                                    | JSON       |         11 |          0 |          0 |         11 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\staticwebassets\msbuild.build.FobumCinema.props               | XML        |          3 |          0 |          0 |          3 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\staticwebassets\msbuild.buildMultiTargeting.FobumCinema.props | XML        |          3 |          0 |          0 |          3 |
+| c:\Users\Airis\Desktop\Back\obj\Release\net6.0\staticwebassets\msbuild.buildTransitive.FobumCinema.props     | XML        |          3 |          0 |          0 |          3 |
+| c:\Users\Airis\Desktop\Back\obj\project.assets.json                                                          | JSON       |      5,181 |          0 |          0 |      5,181 |
+| c:\Users\Airis\Desktop\Back\package-lock.json                                                                | JSON       |     39,052 |          0 |          1 |     39,053 |
+| c:\Users\Airis\Desktop\Back\package.json                                                                     | JSON       |         45 |          0 |          1 |         46 |
+| Total                                                                                                        |            |    157,678 |         99 |      2,388 |    160,165 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

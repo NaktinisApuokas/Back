@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj": {}
+    "C:\\Users\\Airis\\Desktop\\Back\\FobumCinema.csproj": {}
   },
   "projects": {
-    "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj": {
+    "C:\\Users\\Airis\\Desktop\\Back\\FobumCinema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
+        "projectUniqueName": "C:\\Users\\Airis\\Desktop\\Back\\FobumCinema.csproj",
         "projectName": "FobumCinema",
-        "projectPath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\FobumCinema.csproj",
-        "packagesPath": "C:\\Users\\namek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\namek\\Desktop\\New folder\\BakisBack\\obj\\",
+        "projectPath": "C:\\Users\\Airis\\Desktop\\Back\\FobumCinema.csproj",
+        "packagesPath": "C:\\Users\\Airis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Airis\\Desktop\\Back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\namek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Airis\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +58,7 @@
             },
             "HtmlAgilityPack": {
               "target": "Package",
-              "version": "[1.11.46, )"
+              "version": "[1.11.58, )"
             },
             "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
@@ -101,6 +101,10 @@
             "NUnit": {
               "target": "Package",
               "version": "[3.13.3, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.20.0, )"
             }
           },
           "imports": [
@@ -122,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
