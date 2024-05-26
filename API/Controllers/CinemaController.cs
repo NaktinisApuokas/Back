@@ -43,6 +43,14 @@ namespace FobumCinema.API.Controllers
             return Ok(_mapper.Map<CinemaDto>(cinema));
         }
 
+        [HttpGet("ByCity")]
+        //[Authorize(Roles = UserRoles.SimpleUser)]
+        public async Task<IEnumerable<CinemaDto>> GetByCity([FromQuery] string city)
+        {
+            var cinemaList = await _CinemaRepository.GetByCity(city);
+
+            return cinemaList.Select(o => _mapper.Map<CinemaDto>(o));
+        }
 
         [HttpPost]
         //[Authorize(Roles = UserRoles.Admin)]

@@ -21,6 +21,11 @@ namespace FobumCinema.Infrastructure.Repositories
             return await _FobumCinemaContext.Cinema.ToListAsync();
         }
 
+        public async Task<IEnumerable<Cinema>> GetByCity(string city)
+        {
+            return await _FobumCinemaContext.Cinema.Where(o => o.Address.Contains(city)).ToListAsync();
+        }
+
         public async Task<Cinema> Get(int id)
         {
             return await _FobumCinemaContext.Cinema.FirstOrDefaultAsync(o => o.Id == id);

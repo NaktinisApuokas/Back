@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using FobumCinema.Core.Entities;
 using FobumCinema.API.Auth.Model;
 using FobumCinema.Core.Interfaces;
+using Newtonsoft.Json;
 
 namespace FobumCinema.Infrastructure.Data
 {
@@ -17,6 +18,7 @@ namespace FobumCinema.Infrastructure.Data
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly HttpClient client = new HttpClient();
+
         public DatabaseSeeder(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IMovieRepository MovieRepository, IScreeningRepository ScreeningRepository)
         {
             _userManager = userManager;
@@ -99,7 +101,7 @@ namespace FobumCinema.Infrastructure.Data
 
                         if (genreNodes != null && genreNodes.Count > 1)
                         {
-                            secondGenreNode = genreNodes[1]; // Index is 0-based, so 1 is the second item
+                            secondGenreNode = genreNodes[1];
                         }
 
                         var imgNode2 = newDoc.DocumentNode.SelectSingleNode(".//img[contains(@src, 'portrait_small')]");
@@ -125,7 +127,7 @@ namespace FobumCinema.Infrastructure.Data
                             var movie = new Movie
                             {
                                 Title = titleNode.InnerText.Trim(),
-                                Img = imgNode.Attributes["src"].Value,
+                                Img = imgNode.Attributes["src"].Value.Replace("_micro", "_medium"),
                                 Genre = secondGenreNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
                                 CinemaId = CinemaID,
                                 Duration = durationNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
@@ -154,7 +156,7 @@ namespace FobumCinema.Infrastructure.Data
 
                                 if (seatNodes != null && seatNodes.Count > 1)
                                 {
-                                    EmptySeats = seatNodes[1]; // Index is 0-based, so 1 is the second item
+                                    EmptySeats = seatNodes[1];
                                 }
 
                                 var priceNode = docForScreenings.DocumentNode.SelectSingleNode(".//b[contains(text(), '€')]");
@@ -206,7 +208,7 @@ namespace FobumCinema.Infrastructure.Data
                         Img = imgSrc,
                         Genre = genre,
                         CinemaId = CinemaID,
-                        Duration = "", // Add logic to scrape duration if available
+                        Duration = "", 
                         Description = "N/A"
                     };
                     movies.Add(movie);

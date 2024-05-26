@@ -46,6 +46,7 @@ namespace FobumCinema.API.Controllers
             await _userManager.AddToRoleAsync(newUser, UserRoles.SimpleUser);
             return CreatedAtAction(nameof(Register), _mapper.Map<UserDto>(newUser));
         }
+
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult> Login(LoginDto loginDto)
