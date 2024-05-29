@@ -59,9 +59,9 @@ namespace FobumCinema.Infrastructure.Data
         {
             await DeleteScreenings();
 
-            await ScrapeForumCinemaData(2003, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
-            //await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
-        }
+            //await ScrapeForumCinemaData(2003, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
+            await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
+         }
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
         {
             Random random = new Random();
@@ -164,7 +164,7 @@ namespace FobumCinema.Infrastructure.Data
                                 var screeningObj = new Screening
                                 {
                                     Time = screening.InnerText.Trim(),
-                                    Emptyseatnumber = EmptySeats == null ? 0 : Convert.ToInt16(EmptySeats.InnerText.Trim()),
+                                    Emptyseatnumber = EmptySeats == null ? "0" : EmptySeats.InnerText.Trim(),
                                     Price = priceNode?.InnerText.Trim(),
                                     MovieId = MovieID,
                                     Url = newTimeNode.Attributes["href"].Value
@@ -185,7 +185,7 @@ namespace FobumCinema.Infrastructure.Data
             IWebDriver driver = new ChromeDriver();
            
             driver.Navigate().GoToUrl(url);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
 
             var movieElements = driver.FindElements(By.CssSelector("div.item.cell.cell-sm-6"));
             List<Movie> movies = new List<Movie>();
@@ -200,51 +200,87 @@ namespace FobumCinema.Infrastructure.Data
                 var existingMovie = await _MovieRepository.GetByCinemaIdAndTitleAsync(CinemaID, title);
                 int MovieID;
 
-                if (existingMovie == null)
+                var cardInfoDiv = movieElement.FindElement(By.CssSelector("div.card__info"));
+                var detailPageLink = cardInfoDiv.FindElement(By.CssSelector("a")).GetAttribute("href");
+
+                if (!string.IsNullOrEmpty(detailPageLink))
                 {
-                    var movie = new Movie
+                    driver.Navigate().GoToUrl(detailPageLink);
+                    await Task.Delay(2000);
+
+                    var DurationDiv = driver.FindElement(By.CssSelector("div.pageFilm__about"));
+
+                    var durationElements = DurationDiv.FindElements(By.CssSelector("dd"));
+                    string duration = durationElements.Count > 1 ? durationElements[1].Text : "N/A";
+
+                    var DescriptionDiv = driver.FindElement(By.CssSelector("div.pageFilm__synopsis"));
+                    var synopsisButton = DescriptionDiv.FindElement(By.CssSelector("button.pageFilm__synopsis__btn"));
+                    synopsisButton.Click();
+                    await Task.Delay(500);
+
+                    var synopsisDiv = DescriptionDiv.FindElement(By.CssSelector("div"));
+                    string description = synopsisDiv.Text;
+
+                    if (existingMovie == null)
                     {
-                        Title = title,
-                        Img = imgSrc,
-                        Genre = genre,
-                        CinemaId = CinemaID,
-                        Duration = "", 
-                        Description = "N/A"
-                    };
-                    movies.Add(movie);
-                    existingMovie = await _MovieRepository.InsertAsync(movie);
-                }
-
-                MovieID = existingMovie.Id;
-
-                var screeningNodes = movieElement.FindElements(By.CssSelector("li"));
-                int index = 0;
-                if (screeningNodes != null && MovieID != 0)
-                {
-                    foreach (var screeningNode in screeningNodes)
-                    {
-                        if (index++ < 2) continue;
-
-                        var time = "00:01";
-                        try
+                        var movie = new Movie
                         {
-                            time = screeningNode.FindElement(By.CssSelector("span")).Text;
+                            Title = title,
+                            Img = imgSrc,
+                            Genre = genre,
+                            CinemaId = CinemaID,
+                            Duration = duration,
+                            Description = description
+                        };
+                        movies.Add(movie);
+                        existingMovie = await _MovieRepository.InsertAsync(movie);
+                    }
+                    MovieID = existingMovie.Id;
 
-                            screenings.Add(new Screening
+                    var screeningsDiv = driver.FindElement(By.CssSelector("div.filmSchedule"));
+
+                    var screeningNodes = screeningsDiv.FindElements(By.CssSelector("li"));
+
+                    if (screeningNodes != null && MovieID != 0)
+                    {
+                        foreach (var screeningNode in screeningNodes)
+                        {
+                            var timeDiv = screeningNode.FindElement(By.CssSelector("div.filmSchedule__time")).Text;
+                            var EmptyseatnumberDiv = screeningNode.FindElement(By.CssSelector("span[style='padding-left:.5rem']")).Text;
+                            var buttonDiv = screeningNode.FindElement(By.CssSelector("span[style='padding-left:.5rem']"));
+
+                            var button = screeningNode.FindElement(By.CssSelector("a.button.button--small.button--full"));
+                            button.Click();
+                            await Task.Delay(3000);  
+
+                            var screeningUrl = driver.Url;
+
+                            var priceDiv = driver.FindElement(By.CssSelector("li.pageSeatPlan__ticketTypes--standard")); 
+                            var price = priceDiv.FindElement(By.CssSelector("p")).Text;
+
+                            driver.Navigate().Back();
+                            await Task.Delay(2000);
+
+                            try
                             {
-                                Time = time,
-                                Emptyseatnumber = 0,
-                                Price = "6,50 €",
-                                MovieId = MovieID,
-                                Url = ""
-                            });
-
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("An error occurred while extracting time: " + ex.Message);
+                                screenings.Add(new Screening
+                                {
+                                    Time = timeDiv,
+                                    Emptyseatnumber = EmptyseatnumberDiv,
+                                    Price = price,
+                                    MovieId = MovieID,
+                                    Url = screeningUrl
+                                });
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("An error occurred while extracting time: " + ex.Message);
+                            }
                         }
                     }
+
+                    driver.Navigate().Back();
+                    await Task.Delay(3000);
                 }
             }
 

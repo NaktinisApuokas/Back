@@ -2,6 +2,6 @@
 
 namespace FobumCinema.API.Models.Dtos.Screening
 {
-    public record CreateScreeningDto([Required] string Time, [Required] string Price, [Required] int Emptyseatnumber, string Url);
+    public record CreateScreeningDto([Required] string Time, [Required] string Price, [Required] string Emptyseatnumber, string Url);
 
 }
