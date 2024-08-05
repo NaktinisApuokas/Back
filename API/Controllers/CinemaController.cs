@@ -7,6 +7,7 @@ using AutoMapper;
 using FobumCinema.API.Models.Dtos.Cinema;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
+using FobumCinema.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,13 @@ namespace FobumCinema.API.Controllers
     public class CinemaController : ControllerBase
     {
         private readonly ICinemaRepository _CinemaRepository;
+        private readonly ICinemaHallRepository _CinemaHallRepository;
         private readonly IMapper _mapper;
 
-        public CinemaController(ICinemaRepository CinemaRepository, IMapper mapper)
+        public CinemaController(ICinemaRepository CinemaRepository, ICinemaHallRepository CinemaHallRepository, IMapper mapper)
         {
             _CinemaRepository = CinemaRepository;
+            _CinemaHallRepository = CinemaHallRepository;
             _mapper = mapper;
         }
 
@@ -34,13 +37,27 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<CinemaDto>> Get(int id)
         {
             var cinema = await _CinemaRepository.Get(id);
             if (cinema == null) return NotFound($"Cinema with id '{id}' not found.");
 
             return Ok(_mapper.Map<CinemaDto>(cinema));
+        }
+
+        [HttpGet("DetailedInfo")]
+        public async Task<ActionResult<DetailedCinemaDto>> GetDetailInfo(int id)
+        {
+            var cinema = await _CinemaRepository.Get(id);
+            if (cinema == null) return NotFound($"Cinema with id '{id}' not found.");
+
+            var cinemaDtos = _mapper.Map<DetailedCinemaDto>(cinema);
+            var cinemaHalls = await _CinemaHallRepository.GetAllAsync(id);
+
+            bool hasDisabledSeats = cinemaHalls.Any(hall => hall.HasDisabledSeats);
+
+            var updatedCinemaDtos = cinemaDtos with { CinemaHallsCount = cinemaHalls.Count, HasDisabledSeats = hasDisabledSeats };
+            return Ok(updatedCinemaDtos);
         }
 
         [HttpGet("ByCity")]

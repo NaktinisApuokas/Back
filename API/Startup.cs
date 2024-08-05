@@ -71,6 +71,12 @@ namespace FobumCinema.API
             services.AddTransient<ICommentRatingRepository, CommentRatingRepository>();
             services.AddTransient<IMovieMarkRepository, MovieMarkRepository>();
             services.AddTransient<IReviewRepository, ReviewRepository>();
+            services.AddTransient<IHallTypeRepository, HallTypeRepository>();
+            services.AddTransient<ICinemaHallRepository, CinemaHallRepository>();
+            services.AddTransient<ICinemaCompanyRepository, CinemaCompanyRepository>();
+            services.AddTransient<ISeatRepository, SeatRepository>();
+            services.AddTransient<ISeatTypeRepository, SeatTypeRepository>();
+            services.AddTransient<ISeatTypePriceRepository, SeatTypePriceRepository>();
             services.AddTransient<ITokenManager, TokenManager>();
             services.AddTransient<DatabaseSeeder, DatabaseSeeder>();
         }

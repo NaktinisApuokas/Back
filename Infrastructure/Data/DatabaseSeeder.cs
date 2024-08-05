@@ -59,9 +59,10 @@ namespace FobumCinema.Infrastructure.Data
         {
             await DeleteScreenings();
 
-            //await ScrapeForumCinemaData(2003, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
-            await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
-         }
+            await ScrapeForumCinemaData(2003, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
+            //await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
+        }
+
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
         {
             Random random = new Random();
