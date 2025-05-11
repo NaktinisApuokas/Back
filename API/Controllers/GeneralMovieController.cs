@@ -32,7 +32,6 @@ namespace FobumCinema.API.Controllers
             foreach (var movie in movies)
             {
                 var cinema = await _CinemaRepository.Get(movie.CinemaId);
-                movie.Cinema = cinema;
                 var screenings = await _ScreeningRepository.GetAllAsync(movie.Id);
                 movie.Screenings = screenings;
             }

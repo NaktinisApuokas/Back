@@ -26,8 +26,6 @@ namespace FobumCinema.Core.Entities
 
         public int CinemaId { get; set; }
 
-        public Cinema Cinema { get; set; }
-
         public List<Screening> Screenings { get; set; }
 
         public bool IsMarked { get; set; }

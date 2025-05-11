@@ -60,8 +60,10 @@ namespace FobumCinema.Infrastructure.Data
         public async Task ScrapeData()
         {
             //await DeleteScreenings();
-            await ScrapeForumCinemaData(3006, "https://www.forumcinemas.lt/"); //Forum Cinema Vilnius
+            //await ScrapeForumCinemaData(3006, "https://www.forumcinemas.lt/"); //Forum Cinema Vilnius
             //await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
+
+            await ScrapeForumCinemaUpComingMoviesData("https://www.forumcinemas.lt/filmai/greitai-kinuose");
         }
 
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
@@ -366,6 +368,127 @@ namespace FobumCinema.Infrastructure.Data
 
             await _ScreeningRepository.InsertRangeAsync(screenings);
         }
+
+
+        public async Task ScrapeForumCinemaUpComingMoviesData(string url)
+        {
+            List<Movie> movies = new List<Movie>();
+
+            var options = new ChromeOptions();
+            options.AddArgument("--headless");
+            using var driver = new ChromeDriver(options);
+
+            driver.Navigate().GoToUrl(url);
+
+            var updatedPage = driver.PageSource;
+            var doc = new HtmlDocument();
+            doc.LoadHtml(updatedPage);
+
+            var movieCards = doc.DocumentNode.SelectNodes("//div[contains(@class, 'movie-card schedule__item')]");
+
+            if (movieCards != null)
+            {
+                foreach (var card in movieCards)
+                {
+                    var titleNode = card.SelectSingleNode(".//p[contains(@class, 'movie-card__title')]");
+                    var titleEngNode = card.SelectSingleNode(".//p[contains(@class, 'movie-card__subtitle')]");
+                    var genreNode = card.SelectSingleNode(".//div[contains(@class, 'movie-card__categories')]");
+
+                    var dateNode = card.SelectSingleNode(".//span[contains(@class, 'movie-card__label')]");
+
+                    var imgTag = card.SelectSingleNode(".//img[contains(@class, 'image__img')]");
+                    string title = titleNode?.InnerText.Trim();
+                    string titleEng = titleEngNode?.InnerText.Trim();
+
+                    string date = dateNode?.InnerText.Replace("Kinuose nuo", "").Trim();
+
+                    string imgUrl = null;
+
+                    if (imgTag != null)
+                    {
+                        var srcSetAttr = imgTag.GetAttributeValue("data-srcset", null)
+                                        ?? imgTag.GetAttributeValue("srcset", null);
+
+                        if (!string.IsNullOrEmpty(srcSetAttr))
+                        {
+                            imgUrl = srcSetAttr.Split(',')[0].Split(' ')[0];
+
+                            if (imgUrl.StartsWith("//"))
+                            {
+                                imgUrl = "https:" + imgUrl.Replace("width=160", "width=640").Replace("height=90", "height=360");
+                            }
+                        }
+                    }
+
+                    string genre = genreNode?.InnerText.Replace("\r", "").Replace("\n", "").Replace("  ", "").Replace(",", ", ").Trim();
+
+                    if (string.IsNullOrEmpty(genre))
+                    {
+                        genre = "-";
+                    }
+
+                    var MovieLinkNode = card.SelectSingleNode(".//div[contains(@class, 'movie-card__visual-container')]/a");
+                    string MovieLink = MovieLinkNode?.Attributes["href"]?.Value;
+                    string duration = "";
+                    string description = "";
+
+                    if (!string.IsNullOrEmpty(MovieLink))
+                    {
+                        driver.Navigate().GoToUrl(MovieLink.StartsWith("http") ? MovieLink : "https://www.forumcinemas.lt" + MovieLink);
+                        var movieDetailPage = driver.PageSource;
+
+                        var detailDoc = new HtmlDocument();
+                        detailDoc.LoadHtml(movieDetailPage);
+
+                        try
+                        {
+                            var durationNode = detailDoc.DocumentNode.SelectSingleNode("//p[contains(@class, 'movie-details__value')]");
+                            duration = durationNode?.InnerText.Trim();
+                        }
+                        catch
+                        {
+
+                        }
+
+                        try
+                        {
+                            var descriptionNode = detailDoc.DocumentNode.SelectSingleNode("//div[contains(@class, 'media-chess__content')]");
+                            description = descriptionNode?.InnerText.Trim();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                    var trailerUrl = await YouTubeTrailerFetcher.GetTrailerUrlAsync(titleEng);
+
+                    Movie movie = await _MovieRepository.GetByCinemaIdAndTitleAsync(0, title);
+
+
+                    if (movie == null)
+                    {
+                        movie = new Movie
+                        {
+                            Title = title,
+                            TitleEng = titleEng,
+                            Img = imgUrl,
+                            Genre = genre,
+                            CinemaId = 0,
+                            Description = description,
+                            Duration = duration,
+                            TrailerURL = trailerUrl,
+                            Date = date,
+                            IsUpcoming = 1
+                        };
+
+                        movies.Add(movie);
+                        await _MovieRepository.InsertAsync(movie);
+                    }
+                }
+            }
+        }
+
 
         public async Task DeleteScreenings()
         {
