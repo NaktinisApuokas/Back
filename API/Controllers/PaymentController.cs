@@ -25,7 +25,7 @@ public class PaymentController : ControllerBase
     [HttpPost("create-checkout-session")]
     public ActionResult CreateCheckoutSession([FromBody] PaymentRequestDto request)
     {
-        StripeConfiguration.ApiKey = "sk_test_sOJlhnhs1cMM2A3xTUK1SpCw0050l85dpQ";
+        StripeConfiguration.ApiKey = "x";
 
         var metadata = new Dictionary<string, string>
         {
