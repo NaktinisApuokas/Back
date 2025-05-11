@@ -28,6 +28,19 @@ namespace FobumCinema.Infrastructure.Repositories
         {
             return await _FobumCinemaContext.Movie.Where(o => o.CinemaId == cinemaId).ToListAsync();
         }
+
+        public async Task<List<Movie>> GetAllUpcomingAsync()
+        {
+            DateTime dateTime = DateTime.Now;
+
+            var movies = await _FobumCinemaContext.Movie
+                .Where(o => !string.IsNullOrEmpty(o.Date))
+                .ToListAsync();
+
+            return movies
+                .Where(o => DateTime.TryParse(o.Date, out var parsedDate) && parsedDate > DateTime.Now)
+                .ToList();
+        }
         public async Task<List<Movie>> GetAllAsync()
         {
             return await _FobumCinemaContext.Movie.ToListAsync();

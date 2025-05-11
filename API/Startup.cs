@@ -77,6 +77,7 @@ namespace FobumCinema.API
             services.AddTransient<ISeatRepository, SeatRepository>();
             services.AddTransient<ISeatTypeRepository, SeatTypeRepository>();
             services.AddTransient<ISeatTypePriceRepository, SeatTypePriceRepository>();
+            services.AddTransient<ITicketRepository, TicketRepository>();
             services.AddTransient<ITokenManager, TokenManager>();
             services.AddTransient<DatabaseSeeder, DatabaseSeeder>();
         }

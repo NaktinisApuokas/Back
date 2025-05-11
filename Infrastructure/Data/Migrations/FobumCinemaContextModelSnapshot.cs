@@ -41,6 +41,14 @@ namespace FobumCinema.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Lat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -87,8 +95,15 @@ namespace FobumCinema.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("CellMatrixJson")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CinemaId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CollumnSorting")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -107,11 +122,13 @@ namespace FobumCinema.Migrations
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
+                    b.Property<string>("RowSorting")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CinemaId");
-
-                    b.HasIndex("HallTypeId");
 
                     b.ToTable("CinemaHall");
                 });
@@ -204,6 +221,10 @@ namespace FobumCinema.Migrations
                     b.Property<int>("CinemaId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -223,7 +244,18 @@ namespace FobumCinema.Migrations
                     b.Property<bool>("IsMarked")
                         .HasColumnType("bit");
 
+                    b.Property<int>("IsUpcoming")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEng")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrailerURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -254,6 +286,34 @@ namespace FobumCinema.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("MovieMark");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.ReservedSeat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Col")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReservedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScreeningId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReservedSeat");
                 });
 
             modelBuilder.Entity("FobumCinema.Core.Entities.Review", b =>
@@ -290,6 +350,13 @@ namespace FobumCinema.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CinemaHallId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Emptyseatnumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -314,6 +381,135 @@ namespace FobumCinema.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Screening");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.Seat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CinemaHallId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ColIndex")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RowIndex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CinemaHallId");
+
+                    b.ToTable("Seat");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.SeatType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CinemaCompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DefaultPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LogoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CinemaCompanyId");
+
+                    b.ToTable("SeatType");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.SeatTypePrice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ScreeningId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScreeningId");
+
+                    b.HasIndex("SeatTypeId");
+
+                    b.ToTable("SeatTypePrice");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Col")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsScanned")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScreeningId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeatTypeId");
+
+                    b.ToTable("Ticket");
                 });
 
             modelBuilder.Entity("FobumCinema.Core.Entities.User", b =>
@@ -525,15 +721,7 @@ namespace FobumCinema.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FobumCinema.Core.Entities.HallType", "HallType")
-                        .WithMany()
-                        .HasForeignKey("HallTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Cinema");
-
-                    b.Navigation("HallType");
                 });
 
             modelBuilder.Entity("FobumCinema.Core.Entities.Comment", b =>
@@ -611,6 +799,58 @@ namespace FobumCinema.Migrations
                         .IsRequired();
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.Seat", b =>
+                {
+                    b.HasOne("FobumCinema.Core.Entities.CinemaHall", "CinemaHall")
+                        .WithMany()
+                        .HasForeignKey("CinemaHallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CinemaHall");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.SeatType", b =>
+                {
+                    b.HasOne("FobumCinema.Core.Entities.CinemaCompany", "CinemaCompany")
+                        .WithMany()
+                        .HasForeignKey("CinemaCompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CinemaCompany");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.SeatTypePrice", b =>
+                {
+                    b.HasOne("FobumCinema.Core.Entities.Screening", "Screening")
+                        .WithMany()
+                        .HasForeignKey("ScreeningId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FobumCinema.Core.Entities.SeatType", "SeatType")
+                        .WithMany()
+                        .HasForeignKey("SeatTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Screening");
+
+                    b.Navigation("SeatType");
+                });
+
+            modelBuilder.Entity("FobumCinema.Core.Entities.Ticket", b =>
+                {
+                    b.HasOne("FobumCinema.Core.Entities.SeatType", "SeatType")
+                        .WithMany()
+                        .HasForeignKey("SeatTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SeatType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

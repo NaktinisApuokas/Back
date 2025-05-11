@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace FobumCinema.API.Models.Dtos.SeatType
 {
-    public record CreateSeatTypeDto([Required] string Name, [Required] string LogoPath, decimal DefaultPrice, int CinemaCompanyId, int Width, int Height);
+    public record CreateSeatTypeDto([Required] string Name,
+        [Required] IFormFile Logo,
+        int Width,
+        decimal DefaultPrice);
 }

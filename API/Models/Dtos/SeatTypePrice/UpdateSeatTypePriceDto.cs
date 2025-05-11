@@ -2,5 +2,8 @@
 
 namespace FobumCinema.API.Models.Dtos.SeatTypePrice
 {
-    public record UpdateSeatTypePriceDto([Required] decimal Price, int SeatTypeId, int MovieId);
+    public record UpdateSeatTypePriceDto([Required] decimal Price,
+        int SeatTypeId,
+        int MovieId
+        );
 }

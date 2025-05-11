@@ -6,6 +6,10 @@ namespace FobumCinema.Infrastructure.Data
 {
     public class FobumCinemaContext : IdentityDbContext<User>
     {
+        public FobumCinemaContext(DbContextOptions<FobumCinemaContext> options)
+        : base(options)
+        {
+        }
         public DbSet<Cinema> Cinema { get; set; }
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Screening> Screening { get; set; }
@@ -19,10 +23,32 @@ namespace FobumCinema.Infrastructure.Data
         public DbSet<SeatType> SeatType { get; set; }
         public DbSet<Seat> Seat { get; set; }
         public DbSet<SeatTypePrice> SeatTypePrice { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<ReservedSeat> ReservedSeat { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); 
+
+            modelBuilder.Entity<SeatType>()
+                .Property(s => s.DefaultPrice)
+                .HasPrecision(18, 2); 
+
+            modelBuilder.Entity<SeatTypePrice>()
+                .Property(s => s.Price) 
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Ticket>()
+             .Property(s => s.Price)
+             .HasPrecision(18, 2);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=test");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=test");
+            }
         }
     }
 }

@@ -9,10 +9,10 @@ namespace FobumCinema.Core.Entities
 
         public int SeatTypeId { get; set; }
 
-        public SeatType? SeatType { get; set; }
+        public SeatType SeatType { get; set; }
 
-        public int MovieId { get; set; }
+        public int ScreeningId { get; set; }
 
-        public Movie? Movie { get; set; }
+        public Screening Screening { get; set; }
     }
 }
