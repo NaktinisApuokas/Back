@@ -81,7 +81,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<CinemaDto>> Put(int id, UpdateCinemaDto CinemaDto)
+        public async Task<ActionResult<CinemaDto>> Put(int id, [FromBody] UpdateCinemaDto CinemaDto)
         {
             var cinema = await _CinemaRepository.Get(id);
             if (cinema == null) return NotFound($"Couldn't find a cinema with id of {id}");
@@ -94,7 +94,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CinemaDto>> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var cinema = await _CinemaRepository.Get(id);
             if (cinema == null) return NotFound($"Cinema with id '{id}' not found.");

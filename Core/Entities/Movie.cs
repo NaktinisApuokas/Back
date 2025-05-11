@@ -8,6 +8,8 @@ namespace FobumCinema.Core.Entities
 
         public string Title { get; set; }
 
+        public string TitleEng { get; set; }
+
         public string Genre { get; set; }
 
         public string Img { get; set; }
@@ -15,6 +17,12 @@ namespace FobumCinema.Core.Entities
         public string Description { get; set; }
 
         public string Duration { get; set; }
+
+        public string TrailerURL { get; set; }
+
+        public string Date { get; set; }
+
+        public int IsUpcoming { get; set; }
 
         public int CinemaId { get; set; }
 

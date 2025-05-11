@@ -12,8 +12,6 @@ namespace FobumCinema.Core.Entities
 
         public int SeatTypeId { get; set; }
 
-        public SeatType? SeatType { get; set; }
-
         public int CinemaHallId { get; set; }
 
         public CinemaHall? CinemaHall { get; set; }

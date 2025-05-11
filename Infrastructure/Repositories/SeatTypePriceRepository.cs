@@ -24,9 +24,9 @@ namespace FobumCinema.Infrastructure.Repositories
             return await _FobumCinemaContext.SeatTypePrice.FirstOrDefaultAsync(o => o.Id == seatTypePriceId);
         }
 
-        public async Task<List<SeatTypePrice>> GetAllAsync(int movieId)
+        public async Task<List<SeatTypePrice>> GetAllAsync(int ScreeningId)
         {
-            return await _FobumCinemaContext.SeatTypePrice.Where(o => o.MovieId == movieId).ToListAsync();
+            return await _FobumCinemaContext.SeatTypePrice.Where(o => o.ScreeningId == ScreeningId).ToListAsync();
         }
 
         public async Task<SeatTypePrice> InsertAsync(SeatTypePrice seatTypePrice)

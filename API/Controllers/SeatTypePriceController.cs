@@ -24,9 +24,9 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<SeatTypePriceDto>> GetAllAsync(int movieId)
+        public async Task<IEnumerable<SeatTypePriceDto>> GetAllAsync(int ScreeningId)
         {
-            var seatTypePrices = await _SeatTypePriceRepository.GetAllAsync(movieId);
+            var seatTypePrices = await _SeatTypePriceRepository.GetAllAsync(ScreeningId);
             return seatTypePrices.Select(o => _mapper.Map<SeatTypePriceDto>(o));
         }
 
@@ -46,7 +46,7 @@ namespace FobumCinema.API.Controllers
 
             await _SeatTypePriceRepository.InsertAsync(seatTypePrice);
 
-            return Created($"/api/movie/{seatTypePriceDto.MovieId}/seatTypePrices/{seatTypePrice.Id}", _mapper.Map<SeatTypePriceDto>(seatTypePrice));
+            return Created($"/api/movie/{seatTypePriceDto.ScreeningId}/seatTypePrices/{seatTypePrice.Id}", _mapper.Map<SeatTypePriceDto>(seatTypePrice));
         }
 
         [HttpPut("{seatTypePriceId}")]

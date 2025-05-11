@@ -24,33 +24,33 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<SeatTypeDto>> GetAllAsync(int cinemaId)
+        public async Task<IEnumerable<HallTypeDto>> GetAllAsync(int cinemaId)
         {
             var hallTypes = await _HallTypeRepository.GetAllAsync(cinemaId);
-            return hallTypes.Select(o => _mapper.Map<SeatTypeDto>(o));
+            return hallTypes.Select(o => _mapper.Map<HallTypeDto>(o));
         }
 
         [HttpGet("{hallTypeId}")]
-        public async Task<ActionResult<SeatTypeDto>> GetAsync(int hallTypeId)
+        public async Task<ActionResult<HallTypeDto>> GetAsync(int hallTypeId)
         {
             var hallType = await _HallTypeRepository.GetAsync(hallTypeId);
             if (hallType == null) return NotFound();
 
-            return Ok(_mapper.Map<SeatTypeDto>(hallType));
+            return Ok(_mapper.Map<HallTypeDto>(hallType));
         }
 
         [HttpPost]
-        public async Task<ActionResult<SeatTypeDto>> PostAsync(CreateHallTypeDto hallTypeDto)
+        public async Task<ActionResult<HallTypeDto>> PostAsync(CreateHallTypeDto hallTypeDto)
         {
             var hallType = _mapper.Map<HallType>(hallTypeDto);
 
             await _HallTypeRepository.InsertAsync(hallType);
 
-            return Created($"/api/cinemaCompany/{hallTypeDto.CinemaCompanyId}/hallTypes/{hallType.Id}", _mapper.Map<SeatTypeDto>(hallType));
+            return Created($"/api/cinemaCompany/{hallTypeDto.CinemaCompanyId}/hallTypes/{hallType.Id}", _mapper.Map<HallTypeDto>(hallType));
         }
 
         [HttpPut("{hallTypeId}")]
-        public async Task<ActionResult<SeatTypeDto>> PutAsync(int hallTypeId, UpdateHallTypeDto hallTypeDto)
+        public async Task<ActionResult<HallTypeDto>> PutAsync(int hallTypeId, UpdateHallTypeDto hallTypeDto)
         {
             var oldhallType = await _HallTypeRepository.GetAsync(hallTypeId);
             if (oldhallType == null)
@@ -60,7 +60,7 @@ namespace FobumCinema.API.Controllers
 
             await _HallTypeRepository.UpdateAsync(oldhallType);
 
-            return Ok(_mapper.Map<SeatTypeDto>(oldhallType));
+            return Ok(_mapper.Map<HallTypeDto>(oldhallType));
         }
 
         [HttpDelete("{hallTypeId}")]

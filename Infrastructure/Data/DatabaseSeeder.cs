@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FobumCinema.API.Auth.Model;
+using FobumCinema.Core.Entities;
+using FobumCinema.Core.Interfaces;
+using FobumCinema.Migrations;
 using HtmlAgilityPack;
+using Microsoft.AspNetCore.Identity;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using FobumCinema.Core.Entities;
-using FobumCinema.API.Auth.Model;
-using FobumCinema.Core.Interfaces;
-using Newtonsoft.Json;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+using System.Text.Json;
 
 namespace FobumCinema.Infrastructure.Data
 {
@@ -57,134 +60,162 @@ namespace FobumCinema.Infrastructure.Data
 
         public async Task ScrapeData()
         {
-            await DeleteScreenings();
-
-            await ScrapeForumCinemaData(2003, "https://www.forumcinemas.lt/Movies/Kaunas/"); //Forum Cinema Kaunas
+            //await DeleteScreenings();
+            await ScrapeForumCinemaData(3006, "https://www.forumcinemas.lt/"); //Forum Cinema Vilnius
             //await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
         }
 
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
         {
-            Random random = new Random();
+            List<Movie> movies = new List<Movie>();
+            List<Screening> screenings = new List<Screening>();
 
-            List<Movie> Movies = new();
+            var options = new ChromeOptions();
+            options.AddArgument("--headless");
+            using var driver = new ChromeDriver(options);
 
-            List<Screening> Screenings = new();
+            driver.Navigate().GoToUrl(url);
 
-            var forumCinemasKaunasPage = await client.GetStringAsync(url);
+            var updatedPage = driver.PageSource;
+            var doc = new HtmlDocument();
+            doc.LoadHtml(updatedPage);
 
-            var forumCinemasKaunasDoc = new HtmlDocument();
-            forumCinemasKaunasDoc.LoadHtml(forumCinemasKaunasPage);
+            var movieCards = doc.DocumentNode.SelectNodes("//div[contains(@class, 'schedule-card__inner')]");
 
-            var forumCinemasKaunasMoviesList = forumCinemasKaunasDoc.DocumentNode.SelectNodes("//td[contains(@class, 'result')]");
-
-
-            if (forumCinemasKaunasMoviesList != null)
+            if (movieCards != null)
             {
-                foreach (var list in forumCinemasKaunasMoviesList)
+                foreach (var card in movieCards)
                 {
-                    if (!string.IsNullOrEmpty(list.InnerHtml))
+                    var titleNode = card.SelectSingleNode(".//p[contains(@class, 'schedule-card__title')]");
+                    var titleEngNode = card.SelectSingleNode(".//p[contains(@class, 'schedule-card__secondary-title')]");
+                    var genreNode = card.SelectSingleNode(".//span[contains(@class, 'schedule-card__genre')]");
+                    var timeNode = card.SelectSingleNode(".//time[contains(@class, 'schedule-card__time')]");
+                    var hallNode = card.SelectSingleNode(".//p[contains(@class, 'schedule-card__hall')]");
+                    var seatsNode = card.SelectSingleNode(".//p[contains(@class, 'schedule-card__option-title')]");
+                    var linkNode = card.SelectSingleNode(".//a[contains(@class, 'schedule-card__primary-button')]");
+
+                    var imgTag = card.SelectSingleNode(".//img[contains(@class, 'image__img')]");
+                    string title = titleNode?.InnerText.Trim();
+                    string titleEng = titleEngNode?.InnerText.Trim();
+
+                    string imgUrl = null;
+
+                    if (imgTag != null)
                     {
-                        var titleNode = list.SelectSingleNode(".//a[contains(@class, 'result_h4')]");
+                        var srcSetAttr = imgTag.GetAttributeValue("data-srcset", null)
+                                        ?? imgTag.GetAttributeValue("srcset", null);
 
-                        var imgNode = list.SelectSingleNode(".//img");
-
-                        var link = titleNode.Attributes["href"].Value;
-                        var newPage = await client.GetStringAsync(link);
-                        var newDoc = new HtmlDocument();
-                        newDoc.LoadHtml(newPage);
-
-                        var genreNode = newDoc.DocumentNode.SelectSingleNode("//div[contains(@style, 'margin-top: 10px;')]");
-
-                        var genreNodes = newDoc.DocumentNode.SelectNodes("//div[contains(@style, 'margin-top: 10px;')]");
-
-                        HtmlNode secondGenreNode = null;
-
-                        if (genreNodes != null && genreNodes.Count > 1)
+                        if (!string.IsNullOrEmpty(srcSetAttr))
                         {
-                            secondGenreNode = genreNodes[1];
-                        }
+                            imgUrl = srcSetAttr.Split(',')[0].Split(' ')[0];
 
-                        var imgNode2 = newDoc.DocumentNode.SelectSingleNode(".//img[contains(@src, 'portrait_small')]");
-
-
-                        var imgNode3 = newDoc.DocumentNode.SelectNodes(".//img");
-
-                        var descriptionNode = newDoc.DocumentNode.SelectSingleNode("//div[@class='contboxrow']");
-
-                        var durationNode = newDoc.DocumentNode.SelectSingleNode(".//b[contains(text(), 'min')]");
-
-                        Movie movie2 = await _MovieRepository.GetByCinemaIdAndTitleAsync(CinemaID, titleNode.InnerText.Trim());
-
-                        int MovieID = 0;
-
-                        if (movie2 != null)
-                        {
-                            MovieID = movie2.Id;
-                        }
-
-                        if (movie2 == null)
-                        {
-                            var movie = new Movie
+                            if (imgUrl.StartsWith("//"))
                             {
-                                Title = titleNode.InnerText.Trim(),
-                                Img = imgNode.Attributes["src"].Value.Replace("_micro", "_medium"),
-                                Genre = secondGenreNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
-                                CinemaId = CinemaID,
-                                Duration = durationNode?.InnerText.Replace("\n", "").Replace("\r", "").Trim(),
-                                Description = descriptionNode?.InnerText.Trim()
-                            };
-                            Movies.Add(movie);
-
-                            Movie movie3 = await _MovieRepository.InsertAsync(movie);
-                            MovieID = movie3.Id;
-                        }
-
-
-                        var screenings = list.SelectNodes(".//li[@class='showTime']");
-                        if (screenings != null && MovieID != 0)
-                        {
-                            foreach (var screening in screenings)
-                            {
-                                var newTimeNode = screening.SelectSingleNode(".//a");
-                                var pageForScreenings = await client.GetStringAsync(newTimeNode.Attributes["href"].Value);
-                                var docForScreenings = new HtmlDocument();
-                                docForScreenings.LoadHtml(pageForScreenings);
-
-                                var seatNodes = docForScreenings.DocumentNode.SelectNodes("//td[@align='right']");
-
-                                HtmlNode EmptySeats = null;
-
-                                if (seatNodes != null && seatNodes.Count > 1)
-                                {
-                                    EmptySeats = seatNodes[1];
-                                }
-
-                                var priceNode = docForScreenings.DocumentNode.SelectSingleNode(".//b[contains(text(), '€')]");
-
-                                var screeningObj = new Screening
-                                {
-                                    Time = screening.InnerText.Trim(),
-                                    Emptyseatnumber = EmptySeats == null ? "0" : EmptySeats.InnerText.Trim(),
-                                    Price = priceNode?.InnerText.Trim(),
-                                    MovieId = MovieID,
-                                    Url = newTimeNode.Attributes["href"].Value
-                                };
-                                Screenings.Add(screeningObj);
+                                imgUrl = "https:" + imgUrl;
                             }
                         }
                     }
-                }
-                await _ScreeningRepository.InsertRangeAsync(Screenings);
 
-                // await FormatData(Movies, Screenings);
+                    string genre = genreNode?.InnerText.Trim();
+                    string time = timeNode?.InnerText.Trim();
+                    string hall = hallNode?.InnerText.Trim();
+                    string seats = seatsNode?.InnerText.Trim() ?? "0";
+                    string link = linkNode?.Attributes["href"]?.Value;
+                    string price = "0";
+
+
+                    var MovieLinkNode = card.SelectSingleNode(".//div[contains(@class, 'schedule-card__title-container')]/a");
+                    string MovieLink = MovieLinkNode?.Attributes["href"]?.Value;
+                    string duration = "";
+                    string description = "";
+
+                    if (!string.IsNullOrEmpty(MovieLink))
+                    {
+                        driver.Navigate().GoToUrl(MovieLink.StartsWith("http") ? MovieLink : "https://www.forumcinemas.lt" + MovieLink);
+                        var movieDetailPage = driver.PageSource;
+
+                        var detailDoc = new HtmlDocument();
+                        detailDoc.LoadHtml(movieDetailPage);
+
+                        var durationNode = detailDoc.DocumentNode.SelectSingleNode("//p[contains(@class, 'movie-details__value')]");
+                        var descriptionNode = detailDoc.DocumentNode.SelectSingleNode("//div[contains(@class, 'media-chess__content')]");
+
+                        duration = durationNode?.InnerText.Trim();
+                        description = descriptionNode?.InnerText.Trim();
+                    }
+
+                    if (!string.IsNullOrEmpty(link))
+                    {
+                        driver.Navigate().GoToUrl(link.StartsWith("http") ? link : "https://www.forumcinemas.lt" + link);
+                        var ticketPage = driver.PageSource;
+
+                        var detailDoc = new HtmlDocument();
+                        detailDoc.LoadHtml(ticketPage);
+
+                        var priceNodes = detailDoc.DocumentNode.SelectNodes("//ul[contains(@class, 'ticket-list__list')]//li[contains(@class, 'ticket-list__item')]//span[contains(@class, 'ticket-list__price')]");
+
+                        if (priceNodes != null && priceNodes.Count >= 2)
+                        {
+                            price = priceNodes[1].InnerText.Trim(); 
+                        }
+                    }
+
+                    var trailerUrl = await YouTubeTrailerFetcher.GetTrailerUrlAsync(titleEng);
+
+                    Movie movie = await _MovieRepository.GetByCinemaIdAndTitleAsync(CinemaID, title);
+
+                    int MovieID = 0;
+
+                    if (movie != null)
+                    {
+                        MovieID = movie.Id;
+                    }
+                    else
+                    {
+                        movie = new Movie
+                        {
+                            Title = title,
+                            TitleEng = titleEng,
+                            Img = imgUrl,
+                            Genre = genre,
+                            CinemaId = CinemaID,
+                            Description = description,
+                            Duration = duration,
+                            TrailerURL = trailerUrl,
+                            Date = DateTime.Now.ToShortDateString(),
+                            IsUpcoming = 0
+                        };
+
+
+                        movies.Add(movie);
+                        var insertedMovie = await _MovieRepository.InsertAsync(movie);
+                        MovieID = insertedMovie.Id;
+                    }
+
+                    if (!string.IsNullOrEmpty(time))
+                    {
+
+                        var screening = new Screening
+                        {
+                            Time = time,
+                            Emptyseatnumber = seats,
+                            Price = price,
+                            MovieId = MovieID,
+                            Url = link,
+                            Date = DateTime.Now.ToShortDateString()
+                        };
+                        screenings.Add(screening);
+                    }
+                }
+
+                await _ScreeningRepository.InsertRangeAsync(screenings);
             }
         }
 
         public async Task ScrapeCinamonKinoData(int CinemaID, string url)
         {
             IWebDriver driver = new ChromeDriver();
-           
+
             driver.Navigate().GoToUrl(url);
             await Task.Delay(3000);
 
@@ -194,9 +225,36 @@ namespace FobumCinema.Infrastructure.Data
 
             foreach (var movieElement in movieElements)
             {
-                var title = movieElement.FindElement(By.CssSelector("h3.h2")).Text;
-                var imgSrc = movieElement.FindElement(By.CssSelector("div.card__poster")).GetAttribute("data-src");
-                var genre = movieElement.FindElement(By.CssSelector("div.card__info__genre")).Text;
+                var title = "failed";
+                var imgSrc = "failed";
+                var genre = "failed";
+
+                try
+                {
+                    title = movieElement.FindElement(By.CssSelector("h3.h2")).Text;
+                }
+                catch
+                {
+
+                }
+
+                try
+                {
+                    imgSrc = movieElement.FindElement(By.CssSelector("div.card__poster")).GetAttribute("data-src");
+                }
+                catch
+                {
+
+                }
+
+                try
+                {
+                    genre = movieElement.FindElement(By.CssSelector("div.card__info__genre")).Text;
+                }
+                catch
+                {
+
+                }
 
                 var existingMovie = await _MovieRepository.GetByCinemaIdAndTitleAsync(CinemaID, title);
                 int MovieID;
@@ -222,17 +280,35 @@ namespace FobumCinema.Infrastructure.Data
                     var synopsisDiv = DescriptionDiv.FindElement(By.CssSelector("div"));
                     string description = synopsisDiv.Text;
 
+                    var titleEng = title;
+
+                    try
+                    {
+                        titleEng = driver.FindElement(By.CssSelector("p.cover__originalName")).Text;
+                    }
+                    catch
+                    {
+
+                    }
+
+                    var trailerUrl = await YouTubeTrailerFetcher.GetTrailerUrlAsync(titleEng);
+
                     if (existingMovie == null)
                     {
                         var movie = new Movie
                         {
                             Title = title,
+                            TitleEng = titleEng,
                             Img = imgSrc,
                             Genre = genre,
                             CinemaId = CinemaID,
                             Duration = duration,
-                            Description = description
+                            Description = description,
+                            TrailerURL = trailerUrl,
+                            Date = DateTime.Now.ToShortDateString(),
+                            IsUpcoming = 0
                         };
+
                         movies.Add(movie);
                         existingMovie = await _MovieRepository.InsertAsync(movie);
                     }
@@ -250,17 +326,17 @@ namespace FobumCinema.Infrastructure.Data
                             var EmptyseatnumberDiv = screeningNode.FindElement(By.CssSelector("span[style='padding-left:.5rem']")).Text;
                             var buttonDiv = screeningNode.FindElement(By.CssSelector("span[style='padding-left:.5rem']"));
 
-                            var button = screeningNode.FindElement(By.CssSelector("a.button.button--small.button--full"));
-                            button.Click();
-                            await Task.Delay(3000);  
+                            //var button = screeningNode.FindElement(By.CssSelector("a.button.button--small.button--full"));
+                            //button.Click();
+                            //await Task.Delay(3000);
 
                             var screeningUrl = driver.Url;
 
-                            var priceDiv = driver.FindElement(By.CssSelector("li.pageSeatPlan__ticketTypes--standard")); 
-                            var price = priceDiv.FindElement(By.CssSelector("p")).Text;
-
-                            driver.Navigate().Back();
-                            await Task.Delay(2000);
+                            //var priceDiv = driver.FindElement(By.CssSelector("li.pageSeatPlan__ticketTypes--standard"));
+                            //var price = priceDiv.FindElement(By.CssSelector("p")).Text;
+                            var price = "8.60";
+                            //driver.Navigate().Back();
+                            //await Task.Delay(2000);
 
                             try
                             {
@@ -270,7 +346,9 @@ namespace FobumCinema.Infrastructure.Data
                                     Emptyseatnumber = EmptyseatnumberDiv,
                                     Price = price,
                                     MovieId = MovieID,
-                                    Url = screeningUrl
+                                    Url = screeningUrl,
+                                    Date = DateTime.Now.ToShortDateString()
+
                                 });
                             }
                             catch (Exception ex)
@@ -294,6 +372,5 @@ namespace FobumCinema.Infrastructure.Data
         {
             await _ScreeningRepository.DeleteAllAsync();
         }
-
     }
 }

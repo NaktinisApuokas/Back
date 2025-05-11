@@ -19,11 +19,13 @@ namespace FobumCinema.API
             var dbSeeder = (DatabaseSeeder)scope.ServiceProvider.GetService(typeof(DatabaseSeeder));
             await dbSeeder.SeedAsync();
 
-            if (ShouldScrapeData())
-            {
-                await dbSeeder.ScrapeData();
-                UpdateLastRunDate();
-            }
+
+            await dbSeeder.ScrapeData();
+            //if (ShouldScrapeData())
+            //{
+               
+            //    UpdateLastRunDate();
+            //}
 
             await host.RunAsync();
         }

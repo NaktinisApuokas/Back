@@ -27,8 +27,27 @@ namespace FobumCinema.API.Controllers
         public async Task<IEnumerable<SeatTypeDto>> GetAllAsync(int cinemaCompanyId)
         {
             var seatTypes = await _SeatTypeRepository.GetAllAsync(cinemaCompanyId);
-            return seatTypes.Select(o => _mapper.Map<SeatTypeDto>(o));
+            return seatTypes.Select(o => new SeatTypeDto(
+                o.Id,
+                o.Name!,
+                GetLogoBinary(o.LogoPath),
+                null,
+                o.DefaultPrice,
+                o.CinemaCompanyId,
+                o.Width,
+                o.Height
+            ));
         }
+
+        public string? GetLogoBinary(string? logoPath)
+        {
+            if (string.IsNullOrEmpty(logoPath) || !System.IO.File.Exists(logoPath))
+                return null;
+
+            var bytes = System.IO.File.ReadAllBytes(logoPath);
+            return Convert.ToBase64String(bytes);
+        }
+
 
         [HttpGet("{seatTypeId}")]
         public async Task<ActionResult<SeatTypeDto>> GetAsync(int seatTypeId)
@@ -40,13 +59,33 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<SeatTypeDto>> PostAsync(CreateSeatTypeDto seatTypeDto)
+        public async Task<ActionResult<SeatTypeDto>> PostAsync([FromForm] CreateSeatTypeDto seatTypeDto)
         {
-            var seatType = _mapper.Map<SeatType>(seatTypeDto);
+            string? filePath = null;
+
+            if (seatTypeDto.Logo != null)
+            {
+                filePath = Path.Combine("Uploads", "Logos", Guid.NewGuid() + Path.GetExtension(seatTypeDto.Logo.FileName));
+
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+
+                await using var stream = new FileStream(filePath, FileMode.Create);
+                await seatTypeDto.Logo.CopyToAsync(stream);
+            }
+
+            var seatType = new SeatType
+            {
+                Name = seatTypeDto.Name,
+                DefaultPrice = seatTypeDto.DefaultPrice,
+                CinemaCompanyId = 1,
+                LogoPath = filePath ,
+                Width = seatTypeDto.Width,
+                Height = 1
+            };
 
             await _SeatTypeRepository.InsertAsync(seatType);
 
-            return Created($"/api/cinemaCompany/{seatTypeDto.CinemaCompanyId}/seatTypes/{seatType.Id}", _mapper.Map<SeatTypeDto>(seatType));
+            return Created($"/api/cinemaCompany/1/seatTypes/{seatType.Id}", _mapper.Map<CreatedSeatTypeDto>(seatType));
         }
 
         [HttpPut("{seatTypeId}")]
@@ -74,5 +113,9 @@ namespace FobumCinema.API.Controllers
 
             return Ok("SeatType deleted successfully");
         }
+
+
+  
     }
+    
 }

@@ -3,6 +3,7 @@ using AutoMapper;
 using FobumCinema.API.Models.Dtos.Screening;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
+using FobumCinema.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,12 +14,17 @@ namespace FobumCinema.API.Controllers
     public class ScreeningController : ControllerBase
     {
         private readonly IMovieRepository _MovieRepository;
+        private readonly ICinemaRepository _CinemaRepository;
         private readonly IMapper _mapper;
         private readonly IScreeningRepository _ScreeningRepository;
 
-        public ScreeningController(IMovieRepository MovieRepository, IMapper mapper, IScreeningRepository ScreeningRepository)
+        public ScreeningController(IMovieRepository MovieRepository,
+            ICinemaRepository CinemaRepository,
+            IMapper mapper,
+            IScreeningRepository ScreeningRepository)
         {
             _MovieRepository = MovieRepository;
+            _CinemaRepository = CinemaRepository;
             _mapper = mapper;
             _ScreeningRepository = ScreeningRepository;
         }
@@ -31,20 +37,34 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("{screeningId}")]
-        public async Task<ActionResult<ScreeningDto>> GetAsync(int screeningId)
+        public async Task<ActionResult<ScreeningInfoDto>> GetAsync(int screeningId)
         {
-            var movie = await _ScreeningRepository.GetAsync(screeningId);
+            var screening = await _ScreeningRepository.GetAsync(screeningId);
+            if (screening == null) return NotFound();
+
+            var movie = await _MovieRepository.GetAsync(screening.MovieId);
             if (movie == null) return NotFound();
 
-            return Ok(_mapper.Map<ScreeningDto>(movie));
+            var cinema = await _CinemaRepository.Get(movie.CinemaId);
+            if (cinema == null) return NotFound();
+
+            var dto = new ScreeningInfoDto(
+                ScreeningId: screening.Id,
+                Time: screening.Time,
+                MovieTitle: movie.Title,
+                MovieTitleEng: movie.TitleEng, 
+                CinemaName: cinema.Name,
+                ScreeningDateTime: screening.Date + " " + screening.Time 
+            );
+
+            return Ok(dto);
         }
 
-        //insert
         [HttpPost]
         //[Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<ScreeningDto>> PostAsync(int cinemaId, int movieId, CreateScreeningDto screeningDto)
         {
-            var movie = await _MovieRepository.GetAllAsync(movieId);
+            var movie = await _MovieRepository.GetAsync(movieId);
             if (movie == null) return NotFound($"Couldn't find a movie with id of {movieId}");
 
             var screening = _mapper.Map<Screening>(screeningDto);

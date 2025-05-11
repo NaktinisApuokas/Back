@@ -2,5 +2,15 @@
 
 namespace FobumCinema.API.Models.Dtos.Movie
 {
-    public record MovieDto(List<ScreeningDto> Screenings, int Id, string Title, string Genre, string Duration, string Img, string Description, bool IsMarked);
+    public record MovieDto(List<ScreeningDto> Screenings, 
+        int Id,
+        string Title,
+        string TitleEng,
+        string Genre,
+        string Duration,
+        string Img,
+        string Description,
+        string TrailerURL,
+        bool IsMarked
+        );
 }

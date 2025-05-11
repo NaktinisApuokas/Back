@@ -6,6 +6,8 @@ namespace FobumCinema.Core.Interfaces
     {
         Task<CinemaHall> GetAsync(int cinemaHallID);
 
+        Task<CinemaHall> GetByScreeningIDAsync(int ScreeningID);
+
         Task<List<CinemaHall>> GetAllAsync(int cinemaId);
 
         Task<CinemaHall> InsertAsync(CinemaHall cinemaHall);

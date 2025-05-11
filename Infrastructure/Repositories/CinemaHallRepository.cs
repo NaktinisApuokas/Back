@@ -18,10 +18,16 @@ namespace FobumCinema.Infrastructure.Repositories
         {
             _FobumCinemaContext = fobumCinemaContext;
         }
-
+        
         public async Task<CinemaHall> GetAsync(int cinemaHallId)
         {
             return await _FobumCinemaContext.CinemaHall.FirstOrDefaultAsync(o => o.Id == cinemaHallId);
+        }
+        public async Task<CinemaHall> GetByScreeningIDAsync(int ScreeningID)
+        {
+            var Screening = await _FobumCinemaContext.Screening.FirstOrDefaultAsync(o => o.Id == ScreeningID);
+
+            return await _FobumCinemaContext.CinemaHall.FirstOrDefaultAsync(o => o.Id == Screening.CinemaHallId);
         }
 
         public async Task<List<CinemaHall>> GetAllAsync(int cinemaId)

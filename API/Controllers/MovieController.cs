@@ -3,8 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FobumCinema.API.Models.Dtos.Movie;
+using FobumCinema.API.Models.Dtos.Ticket;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
+using FobumCinema.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.API.Controllers
@@ -86,7 +88,7 @@ namespace FobumCinema.API.Controllers
                 {
                     movie.IsMarked = true;
                 }
-
+                 
 
                 if (screenings.Any())
                 {
@@ -97,7 +99,14 @@ namespace FobumCinema.API.Controllers
 
             return moviesWithScreenings.Select(o => _mapper.Map<MovieDto>(o));
         }
+        
+        [HttpGet("upcoming")]
+        public async Task<IEnumerable<ReturnUpcomingMovieDto>> GetAllUpcomingAsync()
+        {
+            var movies = await _MovieRepository.GetAllUpcomingAsync();
 
+            return movies.Select(o => _mapper.Map<ReturnUpcomingMovieDto>(o));
+        }
 
         [HttpGet("{movieId}")]
         public async Task<ActionResult<MovieDto>> GetAsync(int movieId)
@@ -116,18 +125,34 @@ namespace FobumCinema.API.Controllers
 
             var movie = _mapper.Map<Movie>(movieDto);
             movie.CinemaId = cinemaId;
+            movie.IsUpcoming = 1;
+            movie.Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             await _MovieRepository.InsertAsync(movie);
 
             return Created($"/api/cinemas/{cinemaId}/movies/{movie.Id}", _mapper.Map<MovieDto>(movie));
         }
 
-        [HttpPut("{movieId}")]
-        public async Task<ActionResult<MovieDto>> PutAsync(int CinemaId, int movieId, UpdateMovieDto movieDto)
+        [HttpPost("Upcoming")]
+        public async Task<ActionResult> PostUpcomingAsync(UpcomingMovieDto movieDto)
         {
-            var cinema = await _CinemaRepository.Get(CinemaId);
-            if (cinema == null) return NotFound($"Couldn't find a movie with id of {CinemaId}");
+            try
+            {
+                var movie = _mapper.Map<Movie>(movieDto);
 
+                await _MovieRepository.InsertAsync(movie);
+
+                return Ok(new { Status = "Movie successfully created" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Status = "Failed to create Movie", Error = ex.Message });
+            }
+        }
+
+        [HttpPut("{movieId}")]
+        public async Task<ActionResult<MovieDto>> PutAsync(int movieId, UpdateMovieDto movieDto)
+        {
             var oldMovie = await _MovieRepository.GetAsync(movieId);
             if (oldMovie == null)
                 return NotFound();
@@ -137,6 +162,27 @@ namespace FobumCinema.API.Controllers
             await _MovieRepository.UpdateAsync(oldMovie);
 
             return Ok(_mapper.Map<MovieDto>(oldMovie));
+        }
+
+        [HttpPut("{movieId}/upcoming")]
+        public async Task<ActionResult<MovieDto>> PutUpcomingAsync(int movieId, [FromBody] UpcomingMovieDto movieDto)
+        {
+            try
+            {
+                var oldMovie = await _MovieRepository.GetAsync(movieId);
+                if (oldMovie == null)
+                    return NotFound();
+
+                _mapper.Map(movieDto, oldMovie);
+
+                await _MovieRepository.UpdateAsync(oldMovie);
+
+                return Ok(new { Status = "Movie successfully updated" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Status = "Failed to update Movie", Error = ex.Message });
+            }
         }
 
         [HttpDelete("{movieId}")]

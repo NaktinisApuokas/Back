@@ -2,5 +2,11 @@
 
 namespace FobumCinema.API.Models.Dtos.Cinema
 {
-    public record CreateCinemaDto([Required] string Name, string Img, [Required] string Address);
+    public record CreateCinemaDto(
+        [Required] string Name,
+        string Img,
+        [Required] string Address,
+        string Lat,
+        string Lon
+        );
 }
