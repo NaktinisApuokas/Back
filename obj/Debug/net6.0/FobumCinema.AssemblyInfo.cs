@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FobumCinema")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d16eb296f24d96a1a5ff0a018afeda7a4533c734")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd92b8c041e70592cc2fe96bac0c66b3797cd679")]
 [assembly: System.Reflection.AssemblyProductAttribute("FobumCinema")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FobumCinema")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

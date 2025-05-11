@@ -94,17 +94,33 @@
               "target": "Package",
               "version": "[6.0.11, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
+            },
             "NSubstitute": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
             "NUnit": {
               "target": "Package",
-              "version": "[3.13.3, )"
+              "version": "[4.1.0, )"
+            },
+            "OmdbApiNet": {
+              "target": "Package",
+              "version": "[1.3.0, )"
             },
             "Selenium.WebDriver": {
               "target": "Package",
               "version": "[4.20.0, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[48.1.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.8.0, )"
             }
           },
           "imports": [
