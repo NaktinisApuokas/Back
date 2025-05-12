@@ -9,7 +9,8 @@
         string ScreeningDateTime,
         decimal Price,
         int Row,
-        int Col
+        int Col,
+        bool IsScanned
     );
 
 }

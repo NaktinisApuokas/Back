@@ -17,8 +17,5 @@ namespace FobumCinema.Core.Entities
         public int Height { get; set; }
 
         public int CinemaCompanyId { get; set; }
-
-        public CinemaCompany? CinemaCompany { get; set; }
-
     }
 }

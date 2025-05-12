@@ -56,7 +56,8 @@ namespace FobumCinema.API.Controllers
                         ScreeningDateTime: screening.Date + " " + screening.Time,
                         Price: ticket.Price,
                         Row: ticket.Row,
-                        Col: ticket.Col
+                        Col: ticket.Col,
+                        IsScanned: ticket.IsScanned
                     );
 
                     TicketsDto.Add(dto);

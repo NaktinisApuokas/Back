@@ -60,10 +60,10 @@ namespace FobumCinema.Infrastructure.Data
         public async Task ScrapeData()
         {
             //await DeleteScreenings();
-            //await ScrapeForumCinemaData(3006, "https://www.forumcinemas.lt/"); //Forum Cinema Vilnius
-            //await ScrapeCinamonKinoData(2006, "https://cinamonkino.com/mega/lt");
+            //await ScrapeForumCinemaData(3, "https://www.forumcinemas.lt/"); //Forum Cinema Vilnius
+            //await ScrapeCinamonKinoData(2, "https://cinamonkino.com/mega/lt");
 
-            await ScrapeForumCinemaUpComingMoviesData("https://www.forumcinemas.lt/filmai/greitai-kinuose");
+            //await ScrapeForumCinemaUpComingMoviesData("https://www.forumcinemas.lt/filmai/greitai-kinuose");
         }
 
         public async Task ScrapeForumCinemaData(int CinemaID, string url)
@@ -260,9 +260,16 @@ namespace FobumCinema.Infrastructure.Data
                 var existingMovie = await _MovieRepository.GetByCinemaIdAndTitleAsync(CinemaID, title);
                 int MovieID;
 
-                var cardInfoDiv = movieElement.FindElement(By.CssSelector("div.card__info"));
-                var detailPageLink = cardInfoDiv.FindElement(By.CssSelector("a")).GetAttribute("href");
+                string detailPageLink = null;
+                try
+                {
+                    var cardInfoDiv = movieElement.FindElement(By.CssSelector("div.card__info"));
+                    detailPageLink = cardInfoDiv.FindElement(By.CssSelector("a")).GetAttribute("href");
+                }
+                catch
+                {
 
+                }
                 if (!string.IsNullOrEmpty(detailPageLink))
                 {
                     driver.Navigate().GoToUrl(detailPageLink);
@@ -369,7 +376,6 @@ namespace FobumCinema.Infrastructure.Data
             await _ScreeningRepository.InsertRangeAsync(screenings);
         }
 
-
         public async Task ScrapeForumCinemaUpComingMoviesData(string url)
         {
             List<Movie> movies = new List<Movie>();
@@ -460,6 +466,11 @@ namespace FobumCinema.Infrastructure.Data
 
                         }
                     }
+
+                    if (string.IsNullOrEmpty(description))
+                    {
+                        description = "-";
+                    } 
 
                     var trailerUrl = await YouTubeTrailerFetcher.GetTrailerUrlAsync(titleEng);
 

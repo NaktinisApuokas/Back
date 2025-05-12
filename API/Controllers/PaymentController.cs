@@ -25,11 +25,12 @@ public class PaymentController : ControllerBase
     [HttpPost("create-checkout-session")]
     public ActionResult CreateCheckoutSession([FromBody] PaymentRequestDto request)
     {
-        StripeConfiguration.ApiKey = "x";
+        StripeConfiguration.ApiKey = "sk_test_sOJlhnhs1cMM2A3xTUK1SpCw0050l85dpQ";
 
         var metadata = new Dictionary<string, string>
         {
             { "screeningId", request.ScreeningId.ToString() },
+            { "username", request.Username.ToString() },
             { "seats", JsonSerializer.Serialize(request.Seats) } 
         };
 
@@ -74,9 +75,10 @@ public class PaymentController : ControllerBase
         Session session = await service.GetAsync(sessionId);
 
         var screeningId = int.Parse(session.Metadata["screeningId"]);
+        var username = session.Metadata["username"];
         var seats = JsonSerializer.Deserialize<List<SeatDto>>(session.Metadata["seats"]);
 
-        return Ok(new { screeningId, seats });
+        return Ok(new { screeningId, username, seats });
     }
 }
 

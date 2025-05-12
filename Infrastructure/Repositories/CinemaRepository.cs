@@ -23,7 +23,20 @@ namespace FobumCinema.Infrastructure.Repositories
 
         public async Task<IEnumerable<Cinema>> GetByCity(string city)
         {
-            return await _FobumCinemaContext.Cinema.Where(o => o.Address.Contains(city)).ToListAsync();
+
+            if (city.ToLower().Contains("kiti"))
+            {
+                return await _FobumCinemaContext.Cinema.Where(o => !o.Address.Contains("Vilnius") &&
+                !o.Address.Contains("Kaunas") &&
+                !o.Address.Contains("Klaipėda") &&
+                !o.Address.Contains("Šiauliai")
+                ).ToListAsync();
+
+            }
+            else
+            {
+                return await _FobumCinemaContext.Cinema.Where(o => o.Address.Contains(city)).ToListAsync();
+            }
         }
 
         public async Task<Cinema> Get(int id)

@@ -33,7 +33,7 @@ namespace FobumCinema.API.Controllers
         //[Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<IEnumerable<CinemaDto>> GetAll()
         {
-            return (await _CinemaRepository.GetAll()).Select(o => _mapper.Map<CinemaDto>(o));
+            return (await _CinemaRepository.GetAll()).Select(o => _mapper.Map<CinemaDto>(o)).OrderBy(c => c.Name);
         }
 
         [HttpGet("{id}")]
@@ -66,7 +66,7 @@ namespace FobumCinema.API.Controllers
         {
             var cinemaList = await _CinemaRepository.GetByCity(city);
 
-            return cinemaList.Select(o => _mapper.Map<CinemaDto>(o));
+            return cinemaList.Select(o => _mapper.Map<CinemaDto>(o)).OrderBy(c => c.Name);
         }
 
         [HttpPost]

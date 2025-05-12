@@ -29,13 +29,22 @@ namespace FobumCinema.API.Controllers
         public async Task<IEnumerable<GeneralMovieDto>> GetAllMoviesAsync()
         {
             var movies = await _MovieRepository.GetAllMoviesAsync();
-            foreach (var movie in movies)
-            {
-                var cinema = await _CinemaRepository.Get(movie.CinemaId);
-                var screenings = await _ScreeningRepository.GetAllAsync(movie.Id);
-                movie.Screenings = screenings;
-            }
-            return movies.Select(o => _mapper.Map<GeneralMovieDto>(o));
+            var cinemas = await _CinemaRepository.GetAll();
+
+            var cinemaDict = cinemas.ToDictionary(c => c.Id, c => c.Name);
+
+            return movies.Where(o => o.Date == "" || Convert.ToDateTime(o.Date)  < DateTime.Now.AddDays(1)).Select(movie => new GeneralMovieDto(
+                CinemaName: cinemaDict.GetValueOrDefault(movie.CinemaId, "Unknown"),
+                CinemaId: movie.CinemaId.ToString(),
+                Id: movie.Id,
+                Title: movie.Title,
+                TitleEng: movie.TitleEng,
+                Genre: movie.Genre.Replace("Žanras", ""),
+                Duration: movie.Duration,
+                Img: movie.Img,
+                Description: movie.Description,
+                TrailerURL: movie.TrailerURL
+            )).OrderBy(o => o.Title);
         }
 
     }

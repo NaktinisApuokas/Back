@@ -3,7 +3,7 @@
     public class PaymentRequestDto
     {
         public List<SeatDto> Seats { get; set; }
-
+        public string Username { get; set; }
         public int ScreeningId { get; set; }
         public string MovieTitle { get; set; }
         public string MovieTitleEng { get; set; }
