@@ -3,12 +3,14 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.CinemaHall;
 using FobumCinema.API.Models.Dtos.SeatType;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
 using FobumCinema.Infrastructure.Repositories;
 using FobumCinema.Migrations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.API.Controllers
@@ -40,6 +42,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<IEnumerable<CinemaHallDto>> GetAllAsync(int cinemaId)
         {
             var cinemaHalls = await _CinemaHallRepository.GetAllAsync(cinemaId);
@@ -47,6 +50,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("{cinemaHallId}")]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<NewCinemaHallDto>> GetAsync(int cinemaHallId)
         {
             var cinemaHall = await _CinemaHallRepository.GetAsync(cinemaHallId);
@@ -58,6 +62,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("ForScreeningForm")]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<IEnumerable<CinemaHallDto>> GetForScreeningFormAsync(int MovieID)
         {
             var Movie = await _MovieRepository.GetAsync(MovieID);
@@ -68,6 +73,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("ByScreeningID")]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<CinemaHallWithTicketsDto>> GetByScreeningIDAsync(int ScreeningID)
         {
             var cinemaHall = await _CinemaHallRepository.GetByScreeningIDAsync(ScreeningID);
@@ -124,6 +130,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaHallDto>> PostAsync(int cinemaId, CreateCinemaHallDto cinemaHallDto)
         {
             var cinema = await _CinemaRepository.Get(cinemaId);
@@ -138,6 +145,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{cinemaHallId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaHallDto>> PutAsync(int cinemaHallId, CreateCinemaHallDto cinemaHallDto)
         {
             var oldcinemaHall = await _CinemaHallRepository.GetAsync(cinemaHallId);
@@ -152,6 +160,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{cinemaHallId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int cinemaHallId)
         {
             var cinemaHall = await _CinemaHallRepository.GetAsync(cinemaHallId);

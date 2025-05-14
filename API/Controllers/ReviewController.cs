@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Security.Claims;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.Review;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
@@ -42,6 +43,7 @@ namespace FobumCinema.API.Controllers
 
         //insert
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<ReviewDto>> PostAsync(int cinemaId, int movieId, CreateReviewDto reviewDto)
         {
             var movie = await _MovieRepository.GetAllAsync(movieId);
@@ -57,6 +59,7 @@ namespace FobumCinema.API.Controllers
 
         //update
         [HttpPut("{reviewId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<ReviewDto>> PutAsync(int movieId, int reviewId, UpdateReviewDto reviewDto)
         {
             var movie = await _MovieRepository.GetAllAsync(movieId);
@@ -74,6 +77,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{reviewId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int reviewId)
         {
             var review = await _ReviewRepository.GetAsync(reviewId);

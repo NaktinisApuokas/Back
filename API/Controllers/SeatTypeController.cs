@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.SeatType;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.API.Controllers
@@ -59,6 +61,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<SeatTypeDto>> PostAsync([FromForm] CreateSeatTypeDto seatTypeDto)
         {
             string? filePath = null;
@@ -89,6 +92,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{seatTypeId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<SeatTypeDto>> PutAsync(int seatTypeId, UpdateSeatTypeDto seatTypeDto)
         {
             var oldseatType = await _SeatTypeRepository.GetAsync(seatTypeId);
@@ -103,6 +107,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{seatTypeId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int seatTypeId)
         {
             var seatType = await _SeatTypeRepository.GetAsync(seatTypeId);

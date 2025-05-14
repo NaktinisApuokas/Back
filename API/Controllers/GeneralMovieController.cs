@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FobumCinema.API.Models.Dtos.Movie;
 using FobumCinema.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;

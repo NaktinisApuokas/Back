@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.Movie;
 using FobumCinema.API.Models.Dtos.Ticket;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
 using FobumCinema.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.API.Controllers
@@ -118,6 +120,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<MovieDto>> PostAsync(int cinemaId, CreateMovieDto movieDto)
         {
             var cinema = await _CinemaRepository.Get(cinemaId);
@@ -134,6 +137,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost("Upcoming")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> PostUpcomingAsync(UpcomingMovieDto movieDto)
         {
             try
@@ -151,6 +155,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{movieId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<MovieDto>> PutAsync(int movieId, UpdateMovieDto movieDto)
         {
             var oldMovie = await _MovieRepository.GetAsync(movieId);
@@ -165,6 +170,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{movieId}/upcoming")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<MovieDto>> PutUpcomingAsync(int movieId, [FromBody] UpcomingMovieDto movieDto)
         {
             try
@@ -186,6 +192,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{movieId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int movieId)
         {
             var movie = await _MovieRepository.GetAsync(movieId);

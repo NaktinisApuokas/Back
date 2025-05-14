@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.Screening;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
@@ -61,7 +62,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = UserRoles.SimpleUser)]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<ScreeningDto>> PostAsync(int cinemaId, int movieId, CreateScreeningDto screeningDto)
         {
             var movie = await _MovieRepository.GetAsync(movieId);
@@ -77,6 +78,7 @@ namespace FobumCinema.API.Controllers
 
         //update
         [HttpPut("{screeningId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<ScreeningDto>> PutAsync(int movieId, int screeningId, UpdateScreeningDto screeningDto)
         {
             var movie = await _MovieRepository.GetAllAsync(movieId);
@@ -94,6 +96,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{screeningId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int screeningId)
         {
             var screening = await _ScreeningRepository.GetAsync(screeningId);

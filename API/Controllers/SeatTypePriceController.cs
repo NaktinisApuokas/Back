@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.SeatTypePrice;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.API.Controllers
@@ -40,6 +42,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<SeatTypePriceDto>> PostAsync(CreateSeatTypePriceDto seatTypePriceDto)
         {
             var seatTypePrice = _mapper.Map<SeatTypePrice>(seatTypePriceDto);
@@ -50,6 +53,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{seatTypePriceId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<SeatTypePriceDto>> PutAsync(int seatTypePriceId, UpdateSeatTypePriceDto seatTypePriceDto)
         {
             var oldseatTypePrice = await _SeatTypePriceRepository.GetAsync(seatTypePriceId);
@@ -64,6 +68,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{seatTypePriceId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int seatTypePriceId)
         {
             var seatTypePrice = await _SeatTypePriceRepository.GetAsync(seatTypePriceId);

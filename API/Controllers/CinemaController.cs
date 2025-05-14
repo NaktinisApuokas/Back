@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.Cinema;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
@@ -30,13 +31,14 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = UserRoles.SimpleUser)]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<IEnumerable<CinemaDto>> GetAll()
         {
             return (await _CinemaRepository.GetAll()).Select(o => _mapper.Map<CinemaDto>(o)).OrderBy(c => c.Name);
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<CinemaDto>> Get(int id)
         {
             var cinema = await _CinemaRepository.Get(id);
@@ -46,6 +48,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("DetailedInfo")]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<ActionResult<DetailedCinemaDto>> GetDetailInfo(int id)
         {
             var cinema = await _CinemaRepository.Get(id);
@@ -61,7 +64,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpGet("ByCity")]
-        //[Authorize(Roles = UserRoles.SimpleUser)]
+        [Authorize(Roles = UserRoles.SimpleUser)]
         public async Task<IEnumerable<CinemaDto>> GetByCity([FromQuery] string city)
         {
             var cinemaList = await _CinemaRepository.GetByCity(city);
@@ -70,7 +73,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = UserRoles.Admin)]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaDto>> Post(CreateCinemaDto cinemaDto)
         {
             var cinema = _mapper.Map<Cinema>(cinemaDto);
@@ -81,6 +84,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaDto>> Put(int id, [FromBody] UpdateCinemaDto CinemaDto)
         {
             var cinema = await _CinemaRepository.Get(id);
@@ -94,6 +98,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var cinema = await _CinemaRepository.Get(id);

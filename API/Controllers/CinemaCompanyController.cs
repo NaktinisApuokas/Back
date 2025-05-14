@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.CinemaCompany;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
@@ -42,6 +43,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaCompanyDto>> Post(CreateCinemaCompanyDto cinemaDto)
         {
             var cinemaCompany = _mapper.Map<CinemaCompany>(cinemaDto);
@@ -52,6 +54,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaCompanyDto>> Put(int id, UpdateCinemaCompanyDto CinemaDto)
         {
             var cinemaCompany = await _CinemaCompanyRepository.Get(id);
@@ -65,6 +68,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<CinemaCompanyDto>> Delete(int id)
         {
             var cinemaCompany = await _CinemaCompanyRepository.Get(id);

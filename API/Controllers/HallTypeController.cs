@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FobumCinema.API.Auth.Model;
 using FobumCinema.API.Models.Dtos.HallType;
 using FobumCinema.Core.Entities;
 using FobumCinema.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FobumCinema.API.Controllers
@@ -40,6 +42,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<HallTypeDto>> PostAsync(CreateHallTypeDto hallTypeDto)
         {
             var hallType = _mapper.Map<HallType>(hallTypeDto);
@@ -50,6 +53,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpPut("{hallTypeId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult<HallTypeDto>> PutAsync(int hallTypeId, UpdateHallTypeDto hallTypeDto)
         {
             var oldhallType = await _HallTypeRepository.GetAsync(hallTypeId);
@@ -64,6 +68,7 @@ namespace FobumCinema.API.Controllers
         }
 
         [HttpDelete("{hallTypeId}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> DeleteAsync(int hallTypeId)
         {
             var hallType = await _HallTypeRepository.GetAsync(hallTypeId);
